@@ -1,0 +1,33 @@
+!SESSION 2024-02-07 16:26:36.210 -----------------------------------------------
+eclipse.buildId=Version 1.14.1
+java.version=17.0.8.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-02-07 16:26:52.017
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-02-07 16:26:52.019
+!MESSAGE Log4j2 initialized with config file D:\Project\MUSCULAR ACTIVITY MONITORING SYSTEM\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-02-07 16:26:54.202
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-02-07 16:28:54.228
+!MESSAGE Indexed 'MAIN' (2 sources, 53 headers) in 0.802 sec: 1,948 declarations; 2,830 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.042%)
+!SESSION 2024-02-07 16:38:29.329 -----------------------------------------------
+eclipse.buildId=Version 1.14.1
+java.version=17.0.8.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_IN
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-02-07 16:38:35.937
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-02-07 16:38:35.939
+!MESSAGE Log4j2 initialized with config file D:\Project\MUSCULAR ACTIVITY MONITORING SYSTEM\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-02-07 16:38:40.493
+!MESSAGE Started RMI Server, listening on port 41337
