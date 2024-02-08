@@ -5,8 +5,9 @@
  *      Author: vishnu
  */
 
-#include <adc.h>
+#include "adc.h"
 #include <stm32f4xx.h>  // Library for STM32f407
+
 
 #define UARTEN           ( 1U << 17 )
 #define GPIOAEN          ( 1U << 0 )  //TO enable GPIOA
@@ -15,8 +16,9 @@
 
 /* FUNCTION DECLARATION */
 void ADC_init (void);
-void ADC_conv (void);
+void ADC_start (void);
 uint32_t  ADC_read (void);
+void ADC_stop (void);
 
 
 //----------------------------------------------------------------------------------------
@@ -40,16 +42,26 @@ void ADC_init (void){
 }
 
 // To start conversion
-void ADC_conv (void){
+void ADC_start (void){
 
 	ADC1 -> CR2 |= ( 1U << 1 );  // To set continuous conversion mode
 	ADC1 -> CR2 |= ( 1U << 30);  // To start the ADC conversion
 }
 
+void ADC_stop (void){
+	ADC1 -> CR2 &= (~( 1U << 30 ));
+}
+
 // To read ADC data
 uint32_t  ADC_read (void){
 
-	while(!( ADC1-> SR & ( 1U << 1) )){}
+	while(!( ADC1-> SR & ( 1U << 1) ));
 
- 	return( ADC1 -> DR);
+	uint32_t value;
+	value = (ADC1 -> DR);
+	ADC1 -> SR &= (~( 1U << 1));
+
+ 	return( value );
 }
+
+

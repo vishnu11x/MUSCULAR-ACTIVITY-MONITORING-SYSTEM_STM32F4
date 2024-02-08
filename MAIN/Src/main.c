@@ -18,7 +18,8 @@
 
 #include <stdint.h>
 #include <stm32f4xx.h>  // Library for STM32f407
-#include <adc.h>  // Library for adc config
+#include "adc.h"
+#include "switch.h"
 
 
 uint32_t sensor_data;   // To store sensor data
@@ -33,11 +34,18 @@ uint32_t sensor_data;   // To store sensor data
 int main(){
 
 	ADC_init();
-	ADC_conv();
+	ADC_start();
+	SWT1_init();
+
+	while(!((GPIOA -> IDR ) & ( 1U << 0 )));
+
 
 	while(1){
 
+
 		sensor_data = ADC_read();
+
+
 
 	}
 

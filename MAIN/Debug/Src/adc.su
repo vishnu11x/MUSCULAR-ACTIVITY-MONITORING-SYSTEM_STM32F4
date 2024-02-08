@@ -1,3 +1,4 @@
-../Src/adc.c:26:6:ADC_init	4	static
-../Src/adc.c:43:6:ADC_conv	4	static
-../Src/adc.c:50:11:ADC_read	4	static
+../Src/adc.c:28:6:ADC_init	4	static
+../Src/adc.c:45:6:ADC_start	4	static
+../Src/adc.c:51:6:ADC_stop	4	static
+../Src/adc.c:56:11:ADC_read	16	static

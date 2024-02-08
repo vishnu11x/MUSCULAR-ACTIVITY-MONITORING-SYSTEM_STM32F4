@@ -1,0 +1,23 @@
+/*
+ * switch.c
+ *
+ *  Created on: Feb 8, 2024
+ *      Author: vishnu
+ */
+#include "switch.h"
+#include <stm32f4xx.h>
+
+#define SWT1    ( 1U<< 0)
+
+//----------------------------------------------------------------------------------------
+/* FUNCTION DECLARATION */
+void SWT1_init(void);
+void SWT_status(void);
+
+//----------------------------------------------------------------------------------------
+/*Function definition*/
+
+void SWT1_init(void){
+
+	GPIO->
+}
