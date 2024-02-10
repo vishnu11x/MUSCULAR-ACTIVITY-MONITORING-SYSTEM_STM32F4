@@ -20,6 +20,7 @@
 #include <stm32f4xx.h>  // Library for STM32f407
 #include "adc.h"
 #include "switch.h"
+#include "delayms.h"
 
 
 uint32_t sensor_data;   // To store sensor data
@@ -33,17 +34,17 @@ uint32_t sensor_data;   // To store sensor data
 
 int main(){
 
-	ADC_init();
-	ADC_start();
-	SWT1_init();
-
-	while(!((GPIOA -> IDR ) & ( 1U << 0 )));
+	ADC_init();  // Initialize ADC
+	SWT1_init();  // Initialize Switch
+	while(!((GPIOA -> IDR ) & ( 1U << 0 )));  // Wait for I/o from switch
+	ADC_start();  // start ADC
 
 
 	while(1){
 
 
 		sensor_data = ADC_read();
+		delayms(500);
 
 
 

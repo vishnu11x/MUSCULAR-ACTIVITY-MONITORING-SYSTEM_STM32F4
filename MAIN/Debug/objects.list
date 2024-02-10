@@ -1,4 +1,5 @@
 "./Src/adc.o"
+"./Src/delayms.o"
 "./Src/main.o"
 "./Src/switch.o"
 "./Src/syscalls.o"
