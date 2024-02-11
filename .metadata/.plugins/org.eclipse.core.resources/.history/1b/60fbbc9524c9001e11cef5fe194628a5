@@ -17,15 +17,14 @@
  */
 
 #include <stdint.h>
-#include <stm32f4xx.h>// Library for STM32f407
-#include <arm_math.h>
+#include <stm32f4xx.h>  // Library for STM32f407
 #include "adc.h"
 #include "switch.h"
 #include "delayms.h"
+#include "arm_math.h"
 
 
-
-volatile uint32_t sensor_data;   // To store sensor data
+uint32_t sensor_data;   // To store sensor data
 
 
 
@@ -36,6 +35,11 @@ volatile uint32_t sensor_data;   // To store sensor data
 
 int main(){
 
+	/* ENABLE FLOATING POINT UNIT FULL ACESS*/
+	SCB -> CPACR |= ( 1U << 20);
+	SCB -> CPACR |= ( 1U << 21);
+	SCB -> CPACR |= ( 1U << 22);
+	SCB -> CPACR |= ( 1U << 23);
 
 	ADC_init();  // Initialize ADC
 	SWT1_init();  // Initialize Switch

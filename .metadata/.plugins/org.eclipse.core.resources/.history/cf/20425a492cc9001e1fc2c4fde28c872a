@@ -1,0 +1,15 @@
+/*
+ * signal_pros.h
+ *
+ *  Created on: Feb 12, 2024
+ *      Author: vishnu
+ */
+
+#ifndef SIGNAL_PROS_H_
+#define SIGNAL_PROS_H_
+
+void fpu_enable(void);
+
+
+
+#endif /* SIGNAL_PROS_H_ */

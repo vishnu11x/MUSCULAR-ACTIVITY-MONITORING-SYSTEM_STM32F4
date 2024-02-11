@@ -1,6 +1,7 @@
 "./Src/adc.o"
 "./Src/delayms.o"
 "./Src/main.o"
+"./Src/signal_pros.o"
 "./Src/switch.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"

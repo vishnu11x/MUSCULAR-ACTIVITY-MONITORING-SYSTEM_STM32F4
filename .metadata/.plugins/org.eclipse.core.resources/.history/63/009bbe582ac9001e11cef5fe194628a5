@@ -1,0 +1,30 @@
+/*
+ * signal_pros.c
+ *
+ *  Created on: Feb 12, 2024
+ *      Author: vishnu
+ */
+
+#include "signal_pros.h"
+#include <stm32f4xx.h>
+
+
+/* FUNCTION DECLARATION */
+
+void fpu_enable(void); // To enable FPU
+
+
+
+
+/* FUNCTION DEFENTION */
+
+void fpu_enable(void){
+
+	/* ENABLE FLOATING POINT UNIT FULL ACESS*/
+	SCB -> CPACR |= ( 1U << 20);
+	SCB -> CPACR |= ( 1U << 21);
+	SCB -> CPACR |= ( 1U << 22);
+	SCB -> CPACR |= ( 1U << 23);
+}
+
+
