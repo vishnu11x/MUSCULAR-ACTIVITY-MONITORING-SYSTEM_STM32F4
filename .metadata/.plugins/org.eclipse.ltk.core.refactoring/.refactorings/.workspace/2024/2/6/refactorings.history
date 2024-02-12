@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;adc_modular/Src/adc.h&apos;" deleteContents="false" description="Delete resource &apos;adc_modular/Src/adc.h&apos;" element1="/adc_modular/Src/adc.h" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1707313788388"/>&#x0A;<refactoring comment="Delete resource &apos;adc_modular&apos;" deleteContents="true" description="Delete resource &apos;adc_modular&apos;" element1="/adc_modular" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1707314687474"/>
-</session>
