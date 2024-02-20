@@ -5,10 +5,18 @@
  *      Author: vishnu
  */
 
+#include <stdint.h>
 #include "delayms.h"
 #include "stm32f4xx.h"
 
+//----------------------------------------------------------------------------------------
+/* FUNCTION DECLARATION */
+void delayms(int delay);  // To create delay in ms
 
+
+//-----------------------------------------------------------------------------------------
+
+// To create delay in ms
 void delayms(int delay){
 
 	SysTick -> LOAD = 16000;  // no. of clk per milliseconds
@@ -17,9 +25,9 @@ void delayms(int delay){
 
 	for( int i=0; i < delay; i++){
 
-		while(((SysTick -> CTRL ) & ( 1U << 16 )) == 0);
+		while(((SysTick -> CTRL ) & ( 1U << 16 )) == 0);  // To check count flag is high
 	}
 
-	SysTick -> CTRL =  0;
+	SysTick -> CTRL =  0;  // reset count flag
 
 }

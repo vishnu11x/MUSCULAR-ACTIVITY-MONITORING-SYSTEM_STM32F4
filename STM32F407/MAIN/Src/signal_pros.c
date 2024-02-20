@@ -5,9 +5,12 @@
  *      Author: vishnu
  */
 
+#include <stdint.h>
 #include "signal_pros.h"
 #include <stm32f4xx.h>
 #include <arm_math.h>
+
+//------------------------------------------------------------------------------------------------------------------------
 
 
 /* FUNCTION DECLARATION */
@@ -17,6 +20,8 @@ void fpu_enable(void); // To enable FPU
 void convolution( float32_t * source_sig_arry, float32_t * destn_signal_arry, float32_t * imp_response_arry,
 		          uint32_t source_sig_len, uint32_t imp_sig_len); // To perform covolution
 
+
+//------------------------------------------------------------------------------------------------------------------------
 
 
 /* FUNCTION DEFENTION */

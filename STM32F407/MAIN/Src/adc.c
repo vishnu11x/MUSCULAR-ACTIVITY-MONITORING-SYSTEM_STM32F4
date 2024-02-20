@@ -7,18 +7,23 @@
 
 #include "adc.h"
 #include <stm32f4xx.h>  // Library for STM32f407
+#include <arm_math.h>
 
 
-#define UARTEN           ( 1U << 17 )
+
 #define GPIOAEN          ( 1U << 0 )  //TO enable GPIOA
 #define ADC1EN           ( 1U << 8 )  //TO enable ADC1
 #define ADC_CH1          ( 1U << 0 )  // To Select channel 1
+#define ADC_VREF         3.3f         // ADC reference voltage
+#define ADC_RES          (float)(pow(2,12)-1)  // Resolution of ADC (12-bit)
+
 
 /* FUNCTION DECLARATION */
-void ADC_init (void);
-void ADC_start (void);
-uint32_t  ADC_read (void);
-void ADC_stop (void);
+void ADC_init (void);  // To initialize ADC
+void ADC_start (void); // To start ADC
+uint16_t  ADC_read (void);  // To read raw ADC value
+void ADC_stop (void);   // To stop ADC
+float32_t ADC_convert( uint16_t raw_adc);  // TO convert raw ADC value to volts
 
 
 //----------------------------------------------------------------------------------------
@@ -49,19 +54,26 @@ void ADC_start (void){
 }
 
 void ADC_stop (void){
-	ADC1 -> CR2 &= (~( 1U << 30 ));
+	ADC1 -> CR2 &= (~( 1U << 30 ));  // To stop ADC conversion
 }
 
 // To read ADC data
-uint32_t  ADC_read (void){
+uint16_t  ADC_read (void){
 
-	while(!( ADC1-> SR & ( 1U << 1) ));
+	while(!( ADC1-> SR & ( 1U << 1) ));  // To check if ADC conversion finished
 
-	uint32_t value;
+	uint32_t value;  // To store raw ADC value
 	value = (ADC1 -> DR);
-	ADC1 -> SR &= (~( 1U << 1));
+	ADC1 -> SR &= (~( 1U << 1));  // Clear status register of ADC
 
  	return( value );
+}
+
+// TO convert raw ADC value to volts
+float32_t ADC_convert( uint16_t raw_adc){
+
+	float32_t ADC_volts = ( raw_adc * ADC_VREF) / ADC_RES;  // Equation to convert to volts
+	return ( ADC_volts);
 }
 
 

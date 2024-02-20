@@ -37,7 +37,7 @@ Src/main.o: ../Src/main.c \
  D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/chip_header/CMSIS/DSP/Include/dsp/filtering_functions.h \
  D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/chip_header/CMSIS/DSP/Include/dsp/support_functions.h \
  D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/chip_header/CMSIS/DSP/Include/dsp/quaternion_math_functions.h \
- ../Inc/adc.h ../Inc/switch.h ../Inc/delayms.h
+ ../Inc/adc.h ../Inc/switch.h ../Inc/delayms.h ../Inc/signal_pros.h
 D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/chip_header/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/chip_header/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h:
 D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/chip_header/CMSIS/Include/core_cm4.h:
@@ -79,3 +79,4 @@ D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-S
 ../Inc/adc.h:
 ../Inc/switch.h:
 ../Inc/delayms.h:
+../Inc/signal_pros.h:

@@ -1,4 +1,4 @@
-01:52:34 **** Build of configuration Debug for project MAIN ****
+17:21:29 **** Build of configuration Debug for project MAIN ****
 make -j12 all 
 arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Startup/startup_stm32f407vgtx.d" -MT"Startup/startup_stm32f407vgtx.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Startup/startup_stm32f407vgtx.o" "../Startup/startup_stm32f407vgtx.s"
 arm-none-eabi-gcc "../Src/adc.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F407G_DISC1 -DSTM32F4 -DSTM32F407VGTx -DSTM32F407xx -DARM_MATH_CM4 -c -I../Inc -I"D:/Project/MUSCULAR ACTIVITY MONITORING SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/chip_header/CMSIS/Device/ST/STM32F4xx/Include" -I"D:/Project/MUSCULAR ACTIVITY MONITORING SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/chip_header/CMSIS/DSP/Include" -I"D:/Project/MUSCULAR ACTIVITY MONITORING SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/chip_header/CMSIS/Include" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/adc.d" -MT"Src/adc.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/adc.o"
@@ -14,11 +14,11 @@ Finished building target: MAIN.elf
 arm-none-eabi-size  MAIN.elf 
 arm-none-eabi-objdump -h -S MAIN.elf  > "MAIN.list"
    text	   data	    bss	    dec	    hex	filename
-   1032	      8	   1568	   2608	    a30	MAIN.elf
+   1216	      8	   1576	   2800	    af0	MAIN.elf
 Finished building: default.size.stdout
  
 Finished building: MAIN.list
  
 
-01:52:36 Build Finished. 0 errors, 0 warnings. (took 1s.670ms)
+17:21:30 Build Finished. 0 errors, 0 warnings. (took 1s.277ms)
 

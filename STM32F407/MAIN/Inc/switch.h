@@ -7,8 +7,9 @@
 
 #ifndef SWITCH_H_
 #define SWITCH_H_
+#include <stdint.h>
 
-void SWT1_init(void);
+void SWT1_init(void);  // TO SET PA0 as input
 
 
 

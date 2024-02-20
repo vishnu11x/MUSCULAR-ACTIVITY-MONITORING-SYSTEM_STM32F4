@@ -18,14 +18,16 @@
 
 #include <stdint.h>
 #include <stm32f4xx.h> // Library for STM32f407
-#include <arm_math.h>
-#include "adc.h"
-#include "switch.h"
-#include "delayms.h"
+#include <arm_math.h>  // Library for math functions
+#include "adc.h"       // User defined header file for ADC
+#include "switch.h"    // User defined header file for switches
+#include "delayms.h"   // User defined header file for delay
+#include "signal_pros.h"  // User defined header file for signal processing
 
 
 
-volatile uint32_t sensor_data;   // To store sensor data
+uint16_t sensor_read;   // To store sensor data
+float32_t sensor_data;  // To store sensor data in volts
 
 
 
@@ -37,20 +39,18 @@ volatile uint32_t sensor_data;   // To store sensor data
 int main(){
 
 
+	fpu_enable();  // Enable floating point unit
 	ADC_init();  // Initialize ADC
 	SWT1_init();  // Initialize Switch
-	while(!((GPIOA -> IDR ) & ( 1U << 0 )));  // Wait for I/o from switch
+	while(!((GPIOA -> IDR ) & ( 1U << 0 )));  // Wait for input from switch
 	ADC_start();  // start ADC
 
 
 	while(1){
 
-
-		sensor_data = ADC_read();
+		sensor_read = ADC_read();  // Read raw ADC value
+		sensor_data = ADC_convert( sensor_read );  // converts raw ADC value to volts
 		delayms(500);
-
-
-
 	}
 
 

@@ -1,0 +1,62 @@
+/**
+ ******************************************************************************
+ * @file           : main.c
+ * @author         : VISHNU C S
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2024 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
+
+#include <stdint.h>
+#include <stm32f4xx.h> // Library for STM32f407
+#include <arm_math.h>
+#include "adc.h"
+#include "switch.h"
+#include "delayms.h"
+#include "signal_pros.h"
+
+
+
+uint16_t sensor_read;   // To store sensor data
+float32_t sensor_data;  // To store sensor data in volts
+
+
+
+
+
+//----------------------------------------------------------------------------------------
+/* MAIN FUNCTION */
+
+int main(){
+
+
+	fpu_enable();
+	ADC_init();  // Initialize ADC
+	SWT1_init();  // Initialize Switch
+	while(!((GPIOA -> IDR ) & ( 1U << 0 )));  // Wait for I/o from switch
+	ADC_start();  // start ADC
+
+
+	while(1){
+
+		sensor_read = ADC_read();
+		sensor_data = ADC_convert( sensor_read );
+		delayms(500);
+
+
+
+	}
+
+
+}
+//----------------------------------------------------------------------------------------
+
