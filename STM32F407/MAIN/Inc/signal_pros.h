@@ -7,7 +7,11 @@
 
 #ifndef SIGNAL_PROS_H_
 #define SIGNAL_PROS_H_
+
+
+
 #include <stdint.h>
+#include <stm32f4xx.h>
 #include <arm_math.h>
 
 void fpu_enable(void); // To enable FPU

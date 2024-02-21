@@ -1,0 +1,38 @@
+/*
+ * sdcard_spi.c
+ *
+ *  Created on: Feb 21, 2024
+ *      Author: vishnu
+ */
+
+#include "sdcard_spi.h"
+#include <stdint.h>
+#include <stm32f4xx.h>
+#include <arm_math.h>
+
+//------------------------------------------------------------------------------------------------
+
+// Function Declaration
+
+void spi_gpio_init(void);  // To initialize SPI
+
+
+
+//------------------------------------------------------------------------------------------------
+
+void spi_gpio_init(void){
+
+	RCC -> AHB1ENR |= ( 1U << 0 ); // Enable clock for GPIOA
+
+	/* Set alternate function for PA5(CLK), PA6(MISO), PA7(MOSI) */
+
+	GPIOA -> MODER =| ( 1U << 10); // Alternative function for PA5
+	GPIOA -> MODER &| ( 1U << 11);
+
+
+
+
+
+
+}
+

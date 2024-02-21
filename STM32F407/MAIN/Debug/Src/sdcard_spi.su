@@ -1,0 +1,2 @@
+../Src/sdcard_spi.c:26:6:spi1_gpio_init	4	static
+../Src/sdcard_spi.c:65:6:spi1_init	4	static

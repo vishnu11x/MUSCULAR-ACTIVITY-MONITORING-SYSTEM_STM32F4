@@ -1,5 +1,5 @@
-../Src/adc.c:33:6:ADC_init	1
-../Src/adc.c:50:6:ADC_start	1
-../Src/adc.c:56:6:ADC_stop	1
-../Src/adc.c:61:11:ADC_read	2
-../Src/adc.c:73:11:ADC_convert	1
+../Src/adc.c:30:6:ADC_init	1
+../Src/adc.c:47:6:ADC_start	1
+../Src/adc.c:53:6:ADC_stop	1
+../Src/adc.c:58:11:ADC_read	2
+../Src/adc.c:70:11:ADC_convert	1

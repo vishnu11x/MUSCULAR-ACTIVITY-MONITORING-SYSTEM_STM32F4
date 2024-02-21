@@ -1,0 +1,61 @@
+/*
+ * sdcard_spi.c
+ *
+ *  Created on: Feb 21, 2024
+ *      Author: vishnu
+ */
+
+#include "sdcard_spi.h"
+#include <stdint.h>
+#include <stm32f4xx.h>
+#include <arm_math.h>
+
+//------------------------------------------------------------------------------------------------
+
+// Function Declaration
+
+void spi_gpio_init(void);  // To initialize SPI
+
+
+
+//------------------------------------------------------------------------------------------------
+
+void spi_gpio_init(void){
+
+	RCC -> AHB1ENR |= ( 1U << 0 ); // Enable clock for GPIOA
+
+	/* Set alternate function for PA5(CLK), PA6(MISO), PA7(MOSI) */
+
+	GPIOA -> MODER &= ~( 1U << 10); // Alternative function for PA5
+	GPIOA -> MODER |= ( 1U << 11);
+
+	GPIOA -> MODER &= ~( 1U << 12); // Alternative function for PA6
+	GPIOA -> MODER |= ( 1U << 13);
+
+	GPIOA -> MODER &= ~( 1U << 14); // Alternative function for PA7
+	GPIOA -> MODER |= ( 1U << 15);
+
+	/* Set PA9 as o/p for SC pin */
+
+	GPIOA -> MODER |= ( 1U << 18);  // General purpose o/p mode for PA9
+	GPIOA -> MODER &= ~( 1U << 19);
+
+	/* Set alternative function type (AF5) for PA5, PA6, PA7 */
+
+	GPIOA -> AFR[0] |= ( 1U << 20);  // AF5 alternative function for PA5
+	GPIOA -> AFR[0] &= ~( 1U << 21);
+	GPIOA -> AFR[0] |= ( 1U << 22);
+	GPIOA -> AFR[0] &= ~( 1U << 23);
+
+	GPIOA -> AFR[4] |= ( 1U << 24);  // AF5 alternative function for PA6
+	GPIOA -> AFR[0] &= ~( 1U << 25);
+	GPIOA -> AFR[0] |= ( 1U << 26);
+	GPIOA -> AFR[0] &= ~( 1U << 27);
+
+	GPIOA -> AFR[0] |= ( 1U << 28);  // AF5 alternative function for PA7
+	GPIOA -> AFR[0] &= ~( 1U << 29);
+	GPIOA -> AFR[0] |= ( 1U << 20);
+	GPIOA -> AFR[0] &= ~( 1U << 21);
+
+}
+

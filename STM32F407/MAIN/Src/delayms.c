@@ -5,9 +5,8 @@
  *      Author: vishnu
  */
 
-#include <stdint.h>
 #include "delayms.h"
-#include "stm32f4xx.h"
+
 
 //----------------------------------------------------------------------------------------
 /* FUNCTION DECLARATION */

@@ -5,10 +5,8 @@
  *      Author: vishnu
  */
 
-#include <stdint.h>
 #include "signal_pros.h"
-#include <stm32f4xx.h>
-#include <arm_math.h>
+
 
 //------------------------------------------------------------------------------------------------------------------------
 

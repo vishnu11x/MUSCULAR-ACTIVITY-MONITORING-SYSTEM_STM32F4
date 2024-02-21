@@ -7,8 +7,13 @@
 
 #ifndef ADC_H_
 #define ADC_H_
+
 #include <stdint.h>
+#include <stm32f4xx.h>  // Library for STM32f407
 #include <arm_math.h>
+
+
+
 void ADC_init (void);  // To initialize ADC
 void ADC_start (void); // To start ADC
 uint16_t  ADC_read (void);  // To read raw ADC value
