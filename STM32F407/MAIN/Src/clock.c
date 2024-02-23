@@ -16,7 +16,7 @@
 /* FUNCTION DEFINITION */
 
 /* Set system clock to 168Hz */
-void clock_168hz_config(void){
+void clock_max_config(void){
 
 	RCC -> CR |= ( 1U << 16);  // Enable HSE oscillator
 	while( ( (RCC -> CR) & ( 1U << 17 ) ) == 0){}  // Wait till HSE oscillator is stable
@@ -32,7 +32,7 @@ void clock_168hz_config(void){
 	RCC -> CFGR |= ( 1U << 15);
 
 	/* Config PLL */
-	RCC -> PLLCFGR = (PLL_M << 0) | ( PLL_N << 6 ) | (PLL_P << 16 ) | ( 1U << 22 ) | ( PLL_Q << 24 );
+	RCC -> PLLCFGR = (PLL_M) | ( PLL_N << 6 ) | (((PLL_P >>1 )-1) << 16) | ( 1U << 22 ) | ( PLL_Q << 24 );
 
 	RCC -> CR |= ( 1U << 24);  // Enable PLL
 

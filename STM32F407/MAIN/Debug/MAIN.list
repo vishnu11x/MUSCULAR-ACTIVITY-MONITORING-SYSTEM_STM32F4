@@ -41,13 +41,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  18 .debug_macro  00019d41  00000000  00000000  00011bfb  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   00003504  00000000  00000000  0002b93c  2**0
+ 19 .debug_line   0000355e  00000000  00000000  0002b93c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    0008d711  00000000  00000000  0002ee40  2**0
+ 20 .debug_str    0008d70f  00000000  00000000  0002ee9a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  00000208  00000000  00000000  000bc554  2**2
+ 21 .debug_frame  00000208  00000000  00000000  000bc5ac  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000093  00000000  00000000  000bc75c  2**0
+ 22 .debug_line_str 00000093  00000000  00000000  000bc7b4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -132,11 +132,11 @@ void ADC_init (void){
  800020e:	4b09      	ldr	r3, [pc, #36]	; (8000234 <ADC_init+0x6c>)
  8000210:	2200      	movs	r2, #0
  8000212:	62da      	str	r2, [r3, #44]	; 0x2c
-	ADC1 -> CR1 |= (( 1U << 24 ) | ( 1U << 25 )); // Set Resolution to 12-bit
+	ADC1 -> CR1 &= ~(( 1U << 24 ) | ( 1U << 25 )); // Set Resolution to 12-bit
  8000214:	4b07      	ldr	r3, [pc, #28]	; (8000234 <ADC_init+0x6c>)
  8000216:	685b      	ldr	r3, [r3, #4]
  8000218:	4a06      	ldr	r2, [pc, #24]	; (8000234 <ADC_init+0x6c>)
- 800021a:	f043 7340 	orr.w	r3, r3, #50331648	; 0x3000000
+ 800021a:	f023 7340 	bic.w	r3, r3, #50331648	; 0x3000000
  800021e:	6053      	str	r3, [r2, #4]
 }
  8000220:	bf00      	nop
@@ -249,127 +249,127 @@ float32_t ADC_convert( uint16_t raw_adc){
  80002dc:	40533333 	.word	0x40533333
  80002e0:	457ff000 	.word	0x457ff000
 
-080002e4 <clock_168hz_config>:
+080002e4 <clock_max_config>:
 //-----------------------------------------------------------------------------------------------
 
 /* FUNCTION DEFINITION */
 
 /* Set system clock to 168Hz */
-void clock_168hz_config(void){
+void clock_max_config(void){
  80002e4:	b480      	push	{r7}
  80002e6:	af00      	add	r7, sp, #0
 
 	RCC -> CR |= ( 1U << 16);  // Enable HSE oscillator
- 80002e8:	4b35      	ldr	r3, [pc, #212]	; (80003c0 <clock_168hz_config+0xdc>)
+ 80002e8:	4b35      	ldr	r3, [pc, #212]	; (80003c0 <clock_max_config+0xdc>)
  80002ea:	681b      	ldr	r3, [r3, #0]
- 80002ec:	4a34      	ldr	r2, [pc, #208]	; (80003c0 <clock_168hz_config+0xdc>)
+ 80002ec:	4a34      	ldr	r2, [pc, #208]	; (80003c0 <clock_max_config+0xdc>)
  80002ee:	f443 3380 	orr.w	r3, r3, #65536	; 0x10000
  80002f2:	6013      	str	r3, [r2, #0]
 	while( ( (RCC -> CR) & ( 1U << 17 ) ) == 0){}  // Wait till HSE oscillator is stable
  80002f4:	bf00      	nop
- 80002f6:	4b32      	ldr	r3, [pc, #200]	; (80003c0 <clock_168hz_config+0xdc>)
+ 80002f6:	4b32      	ldr	r3, [pc, #200]	; (80003c0 <clock_max_config+0xdc>)
  80002f8:	681b      	ldr	r3, [r3, #0]
  80002fa:	f403 3300 	and.w	r3, r3, #131072	; 0x20000
  80002fe:	2b00      	cmp	r3, #0
- 8000300:	d0f9      	beq.n	80002f6 <clock_168hz_config+0x12>
+ 8000300:	d0f9      	beq.n	80002f6 <clock_max_config+0x12>
 
 	RCC -> CFGR &= ~( 1U << 7);  // Set prescaler for AHB (divide by 1)
- 8000302:	4b2f      	ldr	r3, [pc, #188]	; (80003c0 <clock_168hz_config+0xdc>)
+ 8000302:	4b2f      	ldr	r3, [pc, #188]	; (80003c0 <clock_max_config+0xdc>)
  8000304:	689b      	ldr	r3, [r3, #8]
- 8000306:	4a2e      	ldr	r2, [pc, #184]	; (80003c0 <clock_168hz_config+0xdc>)
+ 8000306:	4a2e      	ldr	r2, [pc, #184]	; (80003c0 <clock_max_config+0xdc>)
  8000308:	f023 0380 	bic.w	r3, r3, #128	; 0x80
  800030c:	6093      	str	r3, [r2, #8]
 
 	RCC -> CFGR |= ( 1U << 10); // Set prescaler for APB1 (divided by 4)
- 800030e:	4b2c      	ldr	r3, [pc, #176]	; (80003c0 <clock_168hz_config+0xdc>)
+ 800030e:	4b2c      	ldr	r3, [pc, #176]	; (80003c0 <clock_max_config+0xdc>)
  8000310:	689b      	ldr	r3, [r3, #8]
- 8000312:	4a2b      	ldr	r2, [pc, #172]	; (80003c0 <clock_168hz_config+0xdc>)
+ 8000312:	4a2b      	ldr	r2, [pc, #172]	; (80003c0 <clock_max_config+0xdc>)
  8000314:	f443 6380 	orr.w	r3, r3, #1024	; 0x400
  8000318:	6093      	str	r3, [r2, #8]
 	RCC -> CFGR &= ~( 1U << 11);
- 800031a:	4b29      	ldr	r3, [pc, #164]	; (80003c0 <clock_168hz_config+0xdc>)
+ 800031a:	4b29      	ldr	r3, [pc, #164]	; (80003c0 <clock_max_config+0xdc>)
  800031c:	689b      	ldr	r3, [r3, #8]
- 800031e:	4a28      	ldr	r2, [pc, #160]	; (80003c0 <clock_168hz_config+0xdc>)
+ 800031e:	4a28      	ldr	r2, [pc, #160]	; (80003c0 <clock_max_config+0xdc>)
  8000320:	f423 6300 	bic.w	r3, r3, #2048	; 0x800
  8000324:	6093      	str	r3, [r2, #8]
 	RCC -> CFGR |= ( 1U << 12);
- 8000326:	4b26      	ldr	r3, [pc, #152]	; (80003c0 <clock_168hz_config+0xdc>)
+ 8000326:	4b26      	ldr	r3, [pc, #152]	; (80003c0 <clock_max_config+0xdc>)
  8000328:	689b      	ldr	r3, [r3, #8]
- 800032a:	4a25      	ldr	r2, [pc, #148]	; (80003c0 <clock_168hz_config+0xdc>)
+ 800032a:	4a25      	ldr	r2, [pc, #148]	; (80003c0 <clock_max_config+0xdc>)
  800032c:	f443 5380 	orr.w	r3, r3, #4096	; 0x1000
  8000330:	6093      	str	r3, [r2, #8]
 
 	RCC -> CFGR &= ~( 1U << 13); // Set prescaler for APB2 (divided by 2)
- 8000332:	4b23      	ldr	r3, [pc, #140]	; (80003c0 <clock_168hz_config+0xdc>)
+ 8000332:	4b23      	ldr	r3, [pc, #140]	; (80003c0 <clock_max_config+0xdc>)
  8000334:	689b      	ldr	r3, [r3, #8]
- 8000336:	4a22      	ldr	r2, [pc, #136]	; (80003c0 <clock_168hz_config+0xdc>)
+ 8000336:	4a22      	ldr	r2, [pc, #136]	; (80003c0 <clock_max_config+0xdc>)
  8000338:	f423 5300 	bic.w	r3, r3, #8192	; 0x2000
  800033c:	6093      	str	r3, [r2, #8]
 	RCC -> CFGR &= ~( 1U << 14);
- 800033e:	4b20      	ldr	r3, [pc, #128]	; (80003c0 <clock_168hz_config+0xdc>)
+ 800033e:	4b20      	ldr	r3, [pc, #128]	; (80003c0 <clock_max_config+0xdc>)
  8000340:	689b      	ldr	r3, [r3, #8]
- 8000342:	4a1f      	ldr	r2, [pc, #124]	; (80003c0 <clock_168hz_config+0xdc>)
+ 8000342:	4a1f      	ldr	r2, [pc, #124]	; (80003c0 <clock_max_config+0xdc>)
  8000344:	f423 4380 	bic.w	r3, r3, #16384	; 0x4000
  8000348:	6093      	str	r3, [r2, #8]
 	RCC -> CFGR |= ( 1U << 15);
- 800034a:	4b1d      	ldr	r3, [pc, #116]	; (80003c0 <clock_168hz_config+0xdc>)
+ 800034a:	4b1d      	ldr	r3, [pc, #116]	; (80003c0 <clock_max_config+0xdc>)
  800034c:	689b      	ldr	r3, [r3, #8]
- 800034e:	4a1c      	ldr	r2, [pc, #112]	; (80003c0 <clock_168hz_config+0xdc>)
+ 800034e:	4a1c      	ldr	r2, [pc, #112]	; (80003c0 <clock_max_config+0xdc>)
  8000350:	f443 4300 	orr.w	r3, r3, #32768	; 0x8000
  8000354:	6093      	str	r3, [r2, #8]
 
 	/* Config PLL */
-	RCC -> PLLCFGR = (PLL_M << 0) | ( PLL_N << 6 ) | (PLL_P << 16 ) | ( 1U << 22 ) | ( PLL_Q << 24 );
- 8000356:	4b1a      	ldr	r3, [pc, #104]	; (80003c0 <clock_168hz_config+0xdc>)
- 8000358:	4a1a      	ldr	r2, [pc, #104]	; (80003c4 <clock_168hz_config+0xe0>)
+	RCC -> PLLCFGR = (PLL_M) | ( PLL_N << 6 ) | (((PLL_P >>1 )-1) << 16) | ( 1U << 22 ) | ( PLL_Q << 24 );
+ 8000356:	4b1a      	ldr	r3, [pc, #104]	; (80003c0 <clock_max_config+0xdc>)
+ 8000358:	4a1a      	ldr	r2, [pc, #104]	; (80003c4 <clock_max_config+0xe0>)
  800035a:	605a      	str	r2, [r3, #4]
 
 	RCC -> CR |= ( 1U << 24);  // Enable PLL
- 800035c:	4b18      	ldr	r3, [pc, #96]	; (80003c0 <clock_168hz_config+0xdc>)
+ 800035c:	4b18      	ldr	r3, [pc, #96]	; (80003c0 <clock_max_config+0xdc>)
  800035e:	681b      	ldr	r3, [r3, #0]
- 8000360:	4a17      	ldr	r2, [pc, #92]	; (80003c0 <clock_168hz_config+0xdc>)
+ 8000360:	4a17      	ldr	r2, [pc, #92]	; (80003c0 <clock_max_config+0xdc>)
  8000362:	f043 7380 	orr.w	r3, r3, #16777216	; 0x1000000
  8000366:	6013      	str	r3, [r2, #0]
 
 	FLASH -> ACR |= ( 1U << 0);  // Set flash latency to 5 wait state
- 8000368:	4b17      	ldr	r3, [pc, #92]	; (80003c8 <clock_168hz_config+0xe4>)
+ 8000368:	4b17      	ldr	r3, [pc, #92]	; (80003c8 <clock_max_config+0xe4>)
  800036a:	681b      	ldr	r3, [r3, #0]
- 800036c:	4a16      	ldr	r2, [pc, #88]	; (80003c8 <clock_168hz_config+0xe4>)
+ 800036c:	4a16      	ldr	r2, [pc, #88]	; (80003c8 <clock_max_config+0xe4>)
  800036e:	f043 0301 	orr.w	r3, r3, #1
  8000372:	6013      	str	r3, [r2, #0]
 	FLASH -> ACR &= ~( 1U << 1);
- 8000374:	4b14      	ldr	r3, [pc, #80]	; (80003c8 <clock_168hz_config+0xe4>)
+ 8000374:	4b14      	ldr	r3, [pc, #80]	; (80003c8 <clock_max_config+0xe4>)
  8000376:	681b      	ldr	r3, [r3, #0]
- 8000378:	4a13      	ldr	r2, [pc, #76]	; (80003c8 <clock_168hz_config+0xe4>)
+ 8000378:	4a13      	ldr	r2, [pc, #76]	; (80003c8 <clock_max_config+0xe4>)
  800037a:	f023 0302 	bic.w	r3, r3, #2
  800037e:	6013      	str	r3, [r2, #0]
 	FLASH -> ACR |= ( 1U << 2);
- 8000380:	4b11      	ldr	r3, [pc, #68]	; (80003c8 <clock_168hz_config+0xe4>)
+ 8000380:	4b11      	ldr	r3, [pc, #68]	; (80003c8 <clock_max_config+0xe4>)
  8000382:	681b      	ldr	r3, [r3, #0]
- 8000384:	4a10      	ldr	r2, [pc, #64]	; (80003c8 <clock_168hz_config+0xe4>)
+ 8000384:	4a10      	ldr	r2, [pc, #64]	; (80003c8 <clock_max_config+0xe4>)
  8000386:	f043 0304 	orr.w	r3, r3, #4
  800038a:	6013      	str	r3, [r2, #0]
 
 	RCC -> CFGR &= ~( 1U << 0);  // Select PLL as system clock
- 800038c:	4b0c      	ldr	r3, [pc, #48]	; (80003c0 <clock_168hz_config+0xdc>)
+ 800038c:	4b0c      	ldr	r3, [pc, #48]	; (80003c0 <clock_max_config+0xdc>)
  800038e:	689b      	ldr	r3, [r3, #8]
- 8000390:	4a0b      	ldr	r2, [pc, #44]	; (80003c0 <clock_168hz_config+0xdc>)
+ 8000390:	4a0b      	ldr	r2, [pc, #44]	; (80003c0 <clock_max_config+0xdc>)
  8000392:	f023 0301 	bic.w	r3, r3, #1
  8000396:	6093      	str	r3, [r2, #8]
 	RCC -> CFGR |= ( 1U << 1);
- 8000398:	4b09      	ldr	r3, [pc, #36]	; (80003c0 <clock_168hz_config+0xdc>)
+ 8000398:	4b09      	ldr	r3, [pc, #36]	; (80003c0 <clock_max_config+0xdc>)
  800039a:	689b      	ldr	r3, [r3, #8]
- 800039c:	4a08      	ldr	r2, [pc, #32]	; (80003c0 <clock_168hz_config+0xdc>)
+ 800039c:	4a08      	ldr	r2, [pc, #32]	; (80003c0 <clock_max_config+0xdc>)
  800039e:	f043 0302 	orr.w	r3, r3, #2
  80003a2:	6093      	str	r3, [r2, #8]
 
 	while(!((RCC -> CFGR) & ( 0x02 << 2))){}
  80003a4:	bf00      	nop
- 80003a6:	4b06      	ldr	r3, [pc, #24]	; (80003c0 <clock_168hz_config+0xdc>)
+ 80003a6:	4b06      	ldr	r3, [pc, #24]	; (80003c0 <clock_max_config+0xdc>)
  80003a8:	689b      	ldr	r3, [r3, #8]
  80003aa:	f003 0308 	and.w	r3, r3, #8
  80003ae:	2b00      	cmp	r3, #0
- 80003b0:	d0f9      	beq.n	80003a6 <clock_168hz_config+0xc2>
+ 80003b0:	d0f9      	beq.n	80003a6 <clock_max_config+0xc2>
 
 
 
@@ -382,7 +382,7 @@ void clock_168hz_config(void){
  80003bc:	4770      	bx	lr
  80003be:	bf00      	nop
  80003c0:	40023800 	.word	0x40023800
- 80003c4:	07425408 	.word	0x07425408
+ 80003c4:	07405408 	.word	0x07405408
  80003c8:	40023c00 	.word	0x40023c00
 
 080003cc <delayms>:
@@ -397,56 +397,56 @@ void delayms(int delay){
  80003d0:	af00      	add	r7, sp, #0
  80003d2:	6078      	str	r0, [r7, #4]
 
-	SysTick -> LOAD = 16000;  // no. of clk per milliseconds
- 80003d4:	4b13      	ldr	r3, [pc, #76]	; (8000424 <delayms+0x58>)
- 80003d6:	f44f 527a 	mov.w	r2, #16000	; 0x3e80
- 80003da:	605a      	str	r2, [r3, #4]
+	SysTick -> LOAD = 167999;  // no. of clk per milliseconds
+ 80003d4:	4b12      	ldr	r3, [pc, #72]	; (8000420 <delayms+0x54>)
+ 80003d6:	4a13      	ldr	r2, [pc, #76]	; (8000424 <delayms+0x58>)
+ 80003d8:	605a      	str	r2, [r3, #4]
 	SysTick -> VAL = 0;  //  clear current value
- 80003dc:	4b11      	ldr	r3, [pc, #68]	; (8000424 <delayms+0x58>)
- 80003de:	2200      	movs	r2, #0
- 80003e0:	609a      	str	r2, [r3, #8]
+ 80003da:	4b11      	ldr	r3, [pc, #68]	; (8000420 <delayms+0x54>)
+ 80003dc:	2200      	movs	r2, #0
+ 80003de:	609a      	str	r2, [r3, #8]
 	SysTick -> CTRL |= ( 1U << 0 ) | ( 1U << 2); // Enable clock and systick
- 80003e2:	4b10      	ldr	r3, [pc, #64]	; (8000424 <delayms+0x58>)
- 80003e4:	681b      	ldr	r3, [r3, #0]
- 80003e6:	4a0f      	ldr	r2, [pc, #60]	; (8000424 <delayms+0x58>)
- 80003e8:	f043 0305 	orr.w	r3, r3, #5
- 80003ec:	6013      	str	r3, [r2, #0]
+ 80003e0:	4b0f      	ldr	r3, [pc, #60]	; (8000420 <delayms+0x54>)
+ 80003e2:	681b      	ldr	r3, [r3, #0]
+ 80003e4:	4a0e      	ldr	r2, [pc, #56]	; (8000420 <delayms+0x54>)
+ 80003e6:	f043 0305 	orr.w	r3, r3, #5
+ 80003ea:	6013      	str	r3, [r2, #0]
 
 	for( int i=0; i < delay; i++){
- 80003ee:	2300      	movs	r3, #0
- 80003f0:	60fb      	str	r3, [r7, #12]
- 80003f2:	e009      	b.n	8000408 <delayms+0x3c>
+ 80003ec:	2300      	movs	r3, #0
+ 80003ee:	60fb      	str	r3, [r7, #12]
+ 80003f0:	e009      	b.n	8000406 <delayms+0x3a>
 
 		while(((SysTick -> CTRL ) & ( 1U << 16 )) == 0);  // To check count flag is high
- 80003f4:	bf00      	nop
- 80003f6:	4b0b      	ldr	r3, [pc, #44]	; (8000424 <delayms+0x58>)
- 80003f8:	681b      	ldr	r3, [r3, #0]
- 80003fa:	f403 3380 	and.w	r3, r3, #65536	; 0x10000
- 80003fe:	2b00      	cmp	r3, #0
- 8000400:	d0f9      	beq.n	80003f6 <delayms+0x2a>
+ 80003f2:	bf00      	nop
+ 80003f4:	4b0a      	ldr	r3, [pc, #40]	; (8000420 <delayms+0x54>)
+ 80003f6:	681b      	ldr	r3, [r3, #0]
+ 80003f8:	f403 3380 	and.w	r3, r3, #65536	; 0x10000
+ 80003fc:	2b00      	cmp	r3, #0
+ 80003fe:	d0f9      	beq.n	80003f4 <delayms+0x28>
 	for( int i=0; i < delay; i++){
- 8000402:	68fb      	ldr	r3, [r7, #12]
- 8000404:	3301      	adds	r3, #1
- 8000406:	60fb      	str	r3, [r7, #12]
- 8000408:	68fa      	ldr	r2, [r7, #12]
- 800040a:	687b      	ldr	r3, [r7, #4]
- 800040c:	429a      	cmp	r2, r3
- 800040e:	dbf1      	blt.n	80003f4 <delayms+0x28>
+ 8000400:	68fb      	ldr	r3, [r7, #12]
+ 8000402:	3301      	adds	r3, #1
+ 8000404:	60fb      	str	r3, [r7, #12]
+ 8000406:	68fa      	ldr	r2, [r7, #12]
+ 8000408:	687b      	ldr	r3, [r7, #4]
+ 800040a:	429a      	cmp	r2, r3
+ 800040c:	dbf1      	blt.n	80003f2 <delayms+0x26>
 	}
 
 	SysTick -> CTRL =  0;  // reset count flag
- 8000410:	4b04      	ldr	r3, [pc, #16]	; (8000424 <delayms+0x58>)
- 8000412:	2200      	movs	r2, #0
- 8000414:	601a      	str	r2, [r3, #0]
+ 800040e:	4b04      	ldr	r3, [pc, #16]	; (8000420 <delayms+0x54>)
+ 8000410:	2200      	movs	r2, #0
+ 8000412:	601a      	str	r2, [r3, #0]
 
 }
- 8000416:	bf00      	nop
- 8000418:	3714      	adds	r7, #20
- 800041a:	46bd      	mov	sp, r7
- 800041c:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000420:	4770      	bx	lr
- 8000422:	bf00      	nop
- 8000424:	e000e010 	.word	0xe000e010
+ 8000414:	bf00      	nop
+ 8000416:	3714      	adds	r7, #20
+ 8000418:	46bd      	mov	sp, r7
+ 800041a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800041e:	4770      	bx	lr
+ 8000420:	e000e010 	.word	0xe000e010
+ 8000424:	0002903f 	.word	0x0002903f
 
 08000428 <main>:
 
@@ -458,8 +458,8 @@ int main(){
  8000428:	b580      	push	{r7, lr}
  800042a:	af00      	add	r7, sp, #0
 
-	clock_168hz_config();
- 800042c:	f7ff ff5a 	bl	80002e4 <clock_168hz_config>
+	clock_max_config();  // Set SysClk 168MHz
+ 800042c:	f7ff ff5a 	bl	80002e4 <clock_max_config>
 	fpu_enable();  // Enable floating point unit
  8000430:	f000 f828 	bl	8000484 <fpu_enable>
 	ADC_init();  // Initialize ADC
@@ -493,8 +493,8 @@ int main(){
  8000464:	eef0 7a40 	vmov.f32	s15, s0
  8000468:	4b05      	ldr	r3, [pc, #20]	; (8000480 <main+0x58>)
  800046a:	edc3 7a00 	vstr	s15, [r3]
-		delayms(500);
- 800046e:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
+		delayms(1000);
+ 800046e:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  8000472:	f7ff ffab 	bl	80003cc <delayms>
 		sensor_read = ADC_read();  // Read raw ADC value
  8000476:	e7ea      	b.n	800044e <main+0x26>

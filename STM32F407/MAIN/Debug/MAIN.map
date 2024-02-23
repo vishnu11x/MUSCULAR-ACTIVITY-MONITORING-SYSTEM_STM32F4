@@ -320,7 +320,7 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x11f ./Src/sdcard_spi.o
  .debug_macro   0x0000000000000000    0x15e97 ./Src/sdcard_spi.o
  .debug_macro   0x0000000000000000       0x6d ./Src/sdcard_spi.o
- .debug_line    0x0000000000000000      0x5fe ./Src/sdcard_spi.o
+ .debug_line    0x0000000000000000      0x608 ./Src/sdcard_spi.o
  .debug_str     0x0000000000000000    0x88531 ./Src/sdcard_spi.o
  .comment       0x0000000000000000       0x44 ./Src/sdcard_spi.o
  .debug_frame   0x0000000000000000       0x50 ./Src/sdcard_spi.o
@@ -957,9 +957,9 @@ LOAD C:/ST/STM32CubeIDE_1.14.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .text.ADC_convert
                 0x00000000080002a0       0x44 ./Src/adc.o
                 0x00000000080002a0                ADC_convert
- .text.clock_168hz_config
+ .text.clock_max_config
                 0x00000000080002e4       0xe8 ./Src/clock.o
-                0x00000000080002e4                clock_168hz_config
+                0x00000000080002e4                clock_max_config
  .text.delayms  0x00000000080003cc       0x5c ./Src/delayms.o
                 0x00000000080003cc                delayms
  .text.main     0x0000000008000428       0x5c ./Src/main.o
@@ -1346,29 +1346,29 @@ LOAD C:/ST/STM32CubeIDE_1.14.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.ext
  .debug_macro   0x000000000001994c      0x317 ./Src/signal_pros.o
  .debug_macro   0x0000000000019c63       0xde ./Src/switch.o
 
-.debug_line     0x0000000000000000     0x3504
- .debug_line    0x0000000000000000      0xb96 ./Src/adc.o
- .debug_line    0x0000000000000b96      0x605 ./Src/clock.o
- .debug_line    0x000000000000119b      0x5fc ./Src/delayms.o
- .debug_line    0x0000000000001797      0xb81 ./Src/main.o
- .debug_line    0x0000000000002318      0xbb4 ./Src/signal_pros.o
- .debug_line    0x0000000000002ecc      0x5bd ./Src/switch.o
- .debug_line    0x0000000000003489       0x7b ./Startup/startup_stm32f407vgtx.o
+.debug_line     0x0000000000000000     0x355e
+ .debug_line    0x0000000000000000      0xbaa ./Src/adc.o
+ .debug_line    0x0000000000000baa      0x60f ./Src/clock.o
+ .debug_line    0x00000000000011b9      0x606 ./Src/delayms.o
+ .debug_line    0x00000000000017bf      0xb95 ./Src/main.o
+ .debug_line    0x0000000000002354      0xbc8 ./Src/signal_pros.o
+ .debug_line    0x0000000000002f1c      0x5c7 ./Src/switch.o
+ .debug_line    0x00000000000034e3       0x7b ./Startup/startup_stm32f407vgtx.o
 
-.debug_str      0x0000000000000000    0x8d711
+.debug_str      0x0000000000000000    0x8d70f
  .debug_str     0x0000000000000000    0x8d4be ./Src/adc.o
                                       0x8d7e1 (size before relaxing)
- .debug_str     0x000000000008d4be       0x7d ./Src/clock.o
-                                      0x88517 (size before relaxing)
- .debug_str     0x000000000008d53b       0x48 ./Src/delayms.o
+ .debug_str     0x000000000008d4be       0x7b ./Src/clock.o
+                                      0x88515 (size before relaxing)
+ .debug_str     0x000000000008d539       0x48 ./Src/delayms.o
                                       0x883e1 (size before relaxing)
- .debug_str     0x000000000008d583       0x64 ./Src/main.o
-                                      0x8d68e (size before relaxing)
- .debug_str     0x000000000008d5e7       0xdc ./Src/signal_pros.o
+ .debug_str     0x000000000008d581       0x64 ./Src/main.o
                                       0x8d68c (size before relaxing)
- .debug_str     0x000000000008d6c3       0x1f ./Src/switch.o
+ .debug_str     0x000000000008d5e5       0xdc ./Src/signal_pros.o
+                                      0x8d68c (size before relaxing)
+ .debug_str     0x000000000008d6c1       0x1f ./Src/switch.o
                                       0x883ff (size before relaxing)
- .debug_str     0x000000000008d6e2       0x2f ./Startup/startup_stm32f407vgtx.o
+ .debug_str     0x000000000008d6e0       0x2f ./Startup/startup_stm32f407vgtx.o
                                          0x9f (size before relaxing)
 
 .debug_frame    0x0000000000000000      0x208

@@ -15,7 +15,7 @@
 
 /* FUNCTION DEFINITION */
 
-void clock_168hz_config(void);  // Set system clock to 168Hz
+void clock_max_config(void);  // Set system clock to 168Hz
 
 
 
