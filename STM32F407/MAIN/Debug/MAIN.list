@@ -132,11 +132,11 @@ void ADC_init (void){
  800020e:	4b09      	ldr	r3, [pc, #36]	; (8000234 <ADC_init+0x6c>)
  8000210:	2200      	movs	r2, #0
  8000212:	62da      	str	r2, [r3, #44]	; 0x2c
-	ADC1 -> CR1 |= (( 1U << 24 ) | ( 1U << 25 )); // Set Resolution to 12-bit
+	ADC1 -> CR1 &= ~(( 1U << 24 ) | ( 1U << 25 )); // Set Resolution to 12-bit
  8000214:	4b07      	ldr	r3, [pc, #28]	; (8000234 <ADC_init+0x6c>)
  8000216:	685b      	ldr	r3, [r3, #4]
  8000218:	4a06      	ldr	r2, [pc, #24]	; (8000234 <ADC_init+0x6c>)
- 800021a:	f043 7340 	orr.w	r3, r3, #50331648	; 0x3000000
+ 800021a:	f023 7340 	bic.w	r3, r3, #50331648	; 0x3000000
  800021e:	6053      	str	r3, [r2, #4]
 }
  8000220:	bf00      	nop
@@ -397,56 +397,57 @@ void delayms(int delay){
  80003d0:	af00      	add	r7, sp, #0
  80003d2:	6078      	str	r0, [r7, #4]
 
-	SysTick -> LOAD = 16000;  // no. of clk per milliseconds
- 80003d4:	4b13      	ldr	r3, [pc, #76]	; (8000424 <delayms+0x58>)
- 80003d6:	f44f 527a 	mov.w	r2, #16000	; 0x3e80
- 80003da:	605a      	str	r2, [r3, #4]
+
+	SysTick -> LOAD = 167999;  // no. of clk per milliseconds
+ 80003d4:	4b12      	ldr	r3, [pc, #72]	; (8000420 <delayms+0x54>)
+ 80003d6:	4a13      	ldr	r2, [pc, #76]	; (8000424 <delayms+0x58>)
+ 80003d8:	605a      	str	r2, [r3, #4]
 	SysTick -> VAL = 0;  //  clear current value
- 80003dc:	4b11      	ldr	r3, [pc, #68]	; (8000424 <delayms+0x58>)
- 80003de:	2200      	movs	r2, #0
- 80003e0:	609a      	str	r2, [r3, #8]
+ 80003da:	4b11      	ldr	r3, [pc, #68]	; (8000420 <delayms+0x54>)
+ 80003dc:	2200      	movs	r2, #0
+ 80003de:	609a      	str	r2, [r3, #8]
 	SysTick -> CTRL |= ( 1U << 0 ) | ( 1U << 2); // Enable clock and systick
- 80003e2:	4b10      	ldr	r3, [pc, #64]	; (8000424 <delayms+0x58>)
- 80003e4:	681b      	ldr	r3, [r3, #0]
- 80003e6:	4a0f      	ldr	r2, [pc, #60]	; (8000424 <delayms+0x58>)
- 80003e8:	f043 0305 	orr.w	r3, r3, #5
- 80003ec:	6013      	str	r3, [r2, #0]
+ 80003e0:	4b0f      	ldr	r3, [pc, #60]	; (8000420 <delayms+0x54>)
+ 80003e2:	681b      	ldr	r3, [r3, #0]
+ 80003e4:	4a0e      	ldr	r2, [pc, #56]	; (8000420 <delayms+0x54>)
+ 80003e6:	f043 0305 	orr.w	r3, r3, #5
+ 80003ea:	6013      	str	r3, [r2, #0]
 
 	for( int i=0; i < delay; i++){
- 80003ee:	2300      	movs	r3, #0
- 80003f0:	60fb      	str	r3, [r7, #12]
- 80003f2:	e009      	b.n	8000408 <delayms+0x3c>
+ 80003ec:	2300      	movs	r3, #0
+ 80003ee:	60fb      	str	r3, [r7, #12]
+ 80003f0:	e009      	b.n	8000406 <delayms+0x3a>
 
 		while(((SysTick -> CTRL ) & ( 1U << 16 )) == 0);  // To check count flag is high
- 80003f4:	bf00      	nop
- 80003f6:	4b0b      	ldr	r3, [pc, #44]	; (8000424 <delayms+0x58>)
- 80003f8:	681b      	ldr	r3, [r3, #0]
- 80003fa:	f403 3380 	and.w	r3, r3, #65536	; 0x10000
- 80003fe:	2b00      	cmp	r3, #0
- 8000400:	d0f9      	beq.n	80003f6 <delayms+0x2a>
+ 80003f2:	bf00      	nop
+ 80003f4:	4b0a      	ldr	r3, [pc, #40]	; (8000420 <delayms+0x54>)
+ 80003f6:	681b      	ldr	r3, [r3, #0]
+ 80003f8:	f403 3380 	and.w	r3, r3, #65536	; 0x10000
+ 80003fc:	2b00      	cmp	r3, #0
+ 80003fe:	d0f9      	beq.n	80003f4 <delayms+0x28>
 	for( int i=0; i < delay; i++){
- 8000402:	68fb      	ldr	r3, [r7, #12]
- 8000404:	3301      	adds	r3, #1
- 8000406:	60fb      	str	r3, [r7, #12]
- 8000408:	68fa      	ldr	r2, [r7, #12]
- 800040a:	687b      	ldr	r3, [r7, #4]
- 800040c:	429a      	cmp	r2, r3
- 800040e:	dbf1      	blt.n	80003f4 <delayms+0x28>
+ 8000400:	68fb      	ldr	r3, [r7, #12]
+ 8000402:	3301      	adds	r3, #1
+ 8000404:	60fb      	str	r3, [r7, #12]
+ 8000406:	68fa      	ldr	r2, [r7, #12]
+ 8000408:	687b      	ldr	r3, [r7, #4]
+ 800040a:	429a      	cmp	r2, r3
+ 800040c:	dbf1      	blt.n	80003f2 <delayms+0x26>
 	}
 
 	SysTick -> CTRL =  0;  // reset count flag
- 8000410:	4b04      	ldr	r3, [pc, #16]	; (8000424 <delayms+0x58>)
- 8000412:	2200      	movs	r2, #0
- 8000414:	601a      	str	r2, [r3, #0]
+ 800040e:	4b04      	ldr	r3, [pc, #16]	; (8000420 <delayms+0x54>)
+ 8000410:	2200      	movs	r2, #0
+ 8000412:	601a      	str	r2, [r3, #0]
 
 }
- 8000416:	bf00      	nop
- 8000418:	3714      	adds	r7, #20
- 800041a:	46bd      	mov	sp, r7
- 800041c:	f85d 7b04 	ldr.w	r7, [sp], #4
- 8000420:	4770      	bx	lr
- 8000422:	bf00      	nop
- 8000424:	e000e010 	.word	0xe000e010
+ 8000414:	bf00      	nop
+ 8000416:	3714      	adds	r7, #20
+ 8000418:	46bd      	mov	sp, r7
+ 800041a:	f85d 7b04 	ldr.w	r7, [sp], #4
+ 800041e:	4770      	bx	lr
+ 8000420:	e000e010 	.word	0xe000e010
+ 8000424:	0002903f 	.word	0x0002903f
 
 08000428 <main>:
 
@@ -460,6 +461,7 @@ int main(){
 
 	clock_168hz_config();
  800042c:	f7ff ff5a 	bl	80002e4 <clock_168hz_config>
+	//SystemCoreClockUpdate();
 	fpu_enable();  // Enable floating point unit
  8000430:	f000 f828 	bl	8000484 <fpu_enable>
 	ADC_init();  // Initialize ADC
@@ -493,8 +495,8 @@ int main(){
  8000464:	eef0 7a40 	vmov.f32	s15, s0
  8000468:	4b05      	ldr	r3, [pc, #20]	; (8000480 <main+0x58>)
  800046a:	edc3 7a00 	vstr	s15, [r3]
-		delayms(500);
- 800046e:	f44f 70fa 	mov.w	r0, #500	; 0x1f4
+		delayms(1000);
+ 800046e:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  8000472:	f7ff ffab 	bl	80003cc <delayms>
 		sensor_read = ADC_read();  // Read raw ADC value
  8000476:	e7ea      	b.n	800044e <main+0x26>
