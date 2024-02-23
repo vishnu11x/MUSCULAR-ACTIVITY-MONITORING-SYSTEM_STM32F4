@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;MAIN/Src/clock_168hz_init.c&apos; to &apos;clock.c&apos;" description="Rename resource &apos;clock_168hz_init.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Src/clock_168hz_init.c" name="clock.c" stamp="1708695116645" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;MAIN/Inc/clock_168hz_init.h&apos; to &apos;clock.h&apos;" description="Rename resource &apos;clock_168hz_init.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Inc/clock_168hz_init.h" name="clock.h" stamp="1708695126566" updateReferences="true"/>
+</session>

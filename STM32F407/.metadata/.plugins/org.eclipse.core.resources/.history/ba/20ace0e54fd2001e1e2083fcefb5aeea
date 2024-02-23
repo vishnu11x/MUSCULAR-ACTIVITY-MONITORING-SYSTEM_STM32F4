@@ -1,0 +1,19 @@
+/*
+ * clock_168hz_init.h
+ *
+ *  Created on: Feb 23, 2024
+ *      Author: vishnu
+ */
+
+#ifndef CLOCK_168HZ_INIT_H_
+#define CLOCK_168HZ_INIT_H_
+
+//----------------------------------------------------------------------------------------
+
+/* FUNCTION DEFINITION */
+
+void clock_max_config(void);  // Set system clock to 168Hz
+
+
+
+#endif /* CLOCK_168HZ_INIT_H_ */

@@ -1,4 +1,5 @@
 "./Src/adc.o"
+"./Src/clock.o"
 "./Src/delayms.o"
 "./Src/main.o"
 "./Src/sdcard_spi.o"
