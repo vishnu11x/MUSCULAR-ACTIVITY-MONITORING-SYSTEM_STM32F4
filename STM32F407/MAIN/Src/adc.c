@@ -40,7 +40,7 @@ void ADC_init (void){
 	ADC1 -> CR2 |= ( 1U << 0 );  // Enable ADC1
 	ADC1 -> SQR3 = ADC_CH1;  // Select Channel 1 in Sequence
 	ADC1 -> SQR1 = ( 0X00 );  // length of Channel Sequence (1)
-	ADC1 -> CR1 &= ~(( 1U << 24 ) | ( 1U << 25 )); // Set Resolution to 12-bit
+	ADC1 -> CR1 |= (( 1U << 24 ) | ( 1U << 25 )); // Set Resolution to 12-bit
 }
 
 // To start conversion

@@ -32,7 +32,6 @@ float32_t sensor_data;  // To store sensor data in volts
 int main(){
 
 	clock_168hz_config();
-	//SystemCoreClockUpdate();
 	fpu_enable();  // Enable floating point unit
 	ADC_init();  // Initialize ADC
 	SWT1_init();  // Initialize Switch
@@ -44,7 +43,7 @@ int main(){
 
 		sensor_read = ADC_read();  // Read raw ADC value
 		sensor_data = ADC_convert( sensor_read );  // converts raw ADC value to volts
-		delayms(1000);
+		delayms(500);
 	}
 
 
