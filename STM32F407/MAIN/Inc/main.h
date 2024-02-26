@@ -16,6 +16,6 @@
 #include "delayms.h"   // User defined header file for delay
 #include "signal_pros.h"  // User defined header file for signal processing
 #include "clock.h"   // To config clock
-
+#include "sdcard_spi.h"
 
 #endif /* MAIN_H_ */

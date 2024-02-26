@@ -19,12 +19,6 @@
 #include "main.h"
 
 
-uint16_t sensor_read;   // To store sensor data
-float32_t sensor_data;  // To store sensor data in volts
-
-
-
-
 
 //----------------------------------------------------------------------------------------
 /* MAIN FUNCTION */
@@ -35,18 +29,26 @@ int main(){
 	fpu_enable();  // Enable floating point unit
 	ADC_init();  // Initialize ADC
 	SWT1_init();  // Initialize Switch
-	while(!((GPIOA -> IDR ) & ( 1U << 0 )));  // Wait for input from switch
-	ADC_start();  // start ADC
+
 
 
 	while(1){
 
-		sensor_read = ADC_read();  // Read raw ADC value
-		sensor_data = ADC_convert( sensor_read );  // converts raw ADC value to volts
-		delayms(1000);
+		/* Wait for input from switch*/
+		while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1){
+
+			ADC_start();  // start ADC
+			delayms(1);
+
+		}
+
+		ADC_stop();
+
+
 	}
 
 
 }
+
 //----------------------------------------------------------------------------------------
 
