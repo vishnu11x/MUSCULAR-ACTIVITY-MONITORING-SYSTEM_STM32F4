@@ -55,11 +55,10 @@ void ADC_start (void){
 
 	ADC1 -> CR2 &= ~( 1U << 1);  // To Set in single conversion mode
 	ADC1 -> CR2 |= ( 1U << 30);  // To start the ADC conversion
-	ADC_stop();                  // Stop ADC
+	ADC_stop();
 }
 
 void ADC_stop (void){
-
 	ADC1 -> CR2 &= (~( 1U << 30 ));  // To stop ADC conversion
 }
 
