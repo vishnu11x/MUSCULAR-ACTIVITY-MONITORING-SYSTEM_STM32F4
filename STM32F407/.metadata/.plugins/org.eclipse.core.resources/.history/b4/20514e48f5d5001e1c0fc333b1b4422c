@@ -69,6 +69,12 @@ float32_t ADC_read (void){
 
 }
 
+// TO convert raw ADC value to volts
+float32_t ADC_convert( uint16_t raw_adc){
+
+	float32_t ADC_volts = ( raw_adc * ADC_VREF) / ADC_RES ;  // Equation to convert to volts
+	return ( ADC_volts);
+}
 
 void ADC_IRQHandler(void){
 

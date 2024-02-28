@@ -3,5 +3,4 @@ D:/Project/MUSCULAR ACTIVITY MONITORING SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYST
 ../Src/adc.c:54:6:ADC_start	4	static
 ../Src/adc.c:59:6:ADC_stop	4	static
 ../Src/adc.c:63:11:ADC_read	4	static
-../Src/adc.c:73:11:ADC_convert	24	static
-../Src/adc.c:79:6:ADC_IRQHandler	8	static
+../Src/adc.c:73:6:ADC_IRQHandler	8	static

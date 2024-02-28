@@ -31,23 +31,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .comment      00000043  00000000  00000000  0001069c  2**0
                   CONTENTS, READONLY
- 14 .debug_info   00001352  00000000  00000000  000106df  2**0
+ 14 .debug_info   00001319  00000000  00000000  000106df  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_abbrev 00000644  00000000  00000000  00011a31  2**0
+ 15 .debug_abbrev 00000605  00000000  00000000  000119f8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_aranges 00000120  00000000  00000000  00012078  2**3
+ 16 .debug_aranges 00000118  00000000  00000000  00012000  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_rnglists 000000b8  00000000  00000000  00012198  2**0
+ 17 .debug_rnglists 000000b2  00000000  00000000  00012118  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_macro  00019df5  00000000  00000000  00012250  2**0
+ 18 .debug_macro  00019df5  00000000  00000000  000121ca  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   00003657  00000000  00000000  0002c045  2**0
+ 19 .debug_line   00003637  00000000  00000000  0002bfbf  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    0008dde8  00000000  00000000  0002f69c  2**0
+ 20 .debug_str    0008ddca  00000000  00000000  0002f5f6  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  00000240  00000000  00000000  000bd484  2**2
+ 21 .debug_frame  00000218  00000000  00000000  000bd3c0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000093  00000000  00000000  000bd6c4  2**0
+ 22 .debug_line_str 00000093  00000000  00000000  000bd5d8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -328,9 +328,6 @@ float32_t ADC_read (void){
 
 0800038c <ADC_IRQHandler>:
 
-	float32_t ADC_volts = ( raw_adc * ADC_VREF) / ADC_RES ;  // Equation to convert to volts
-	return ( ADC_volts);
-}
 
 void ADC_IRQHandler(void){
  800038c:	b580      	push	{r7, lr}
