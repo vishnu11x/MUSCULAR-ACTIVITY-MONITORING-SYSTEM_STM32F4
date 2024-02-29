@@ -1,5 +1,5 @@
 /*
- * clock_168hz_init.c
+ * clock.c
  *
  *  Created on: Feb 23, 2024
  *      Author: vishnu
