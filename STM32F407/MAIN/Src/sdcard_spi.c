@@ -83,6 +83,7 @@ void spi1_send (uint16_t *data, uint32_t size){
 	uint16_t temp;
 	while(i<size){
 
+
 	while(!(SPI1 -> SR & ( 1U << 1))){}  // Wait for TXE flag to set
 
 	/* Write data to Data Register */
@@ -119,6 +120,8 @@ void sc_disable(void){
 
 	GPIOA -> ODR |= ( 1U << 9 );  // SET PA9
 }
+
+
 
 
 

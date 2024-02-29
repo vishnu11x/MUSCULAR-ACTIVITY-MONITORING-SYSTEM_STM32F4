@@ -7,4 +7,5 @@
 "./Src/switch.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"
+"./Src/uart2.o"
 "./Startup/startup_stm32f407vgtx.o"
