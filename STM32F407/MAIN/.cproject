@@ -50,6 +50,7 @@
 									<listOptionValue builtIn="false" value="&quot;D:\Project\MUSCULAR ACTIVITY MONITORING SYSTEM\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\STM32F407\MAIN\chip_header\CMSIS\Device\ST\STM32F4xx\Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;D:\Project\MUSCULAR ACTIVITY MONITORING SYSTEM\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\STM32F407\MAIN\chip_header\CMSIS\DSP\Include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;D:\Project\MUSCULAR ACTIVITY MONITORING SYSTEM\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\STM32F407\MAIN\chip_header\CMSIS\Include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;D:\Project\MUSCULAR ACTIVITY MONITORING SYSTEM\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\STM32F407\MAIN\chip_header\Middlewares\Third_Party\FatFs\Inc&quot;"/>
 								</option>
 								<inputType id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c.1429280554" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.input.c"/>
 							</tool>
@@ -79,6 +80,8 @@
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Inc"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Startup"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="chip_header/Middlewares/Third_Party/FatFs/Inc"/>
+						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="chip_header/Middlewares/Third_Party/FatFs/src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

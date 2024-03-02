@@ -5,31 +5,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../chip_header/Middlewares/Third_Party/FatFs/src/option/cc932.c \
-../chip_header/Middlewares/Third_Party/FatFs/src/option/cc936.c \
-../chip_header/Middlewares/Third_Party/FatFs/src/option/cc949.c \
-../chip_header/Middlewares/Third_Party/FatFs/src/option/cc950.c \
-../chip_header/Middlewares/Third_Party/FatFs/src/option/ccsbcs.c \
-../chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.c \
-../chip_header/Middlewares/Third_Party/FatFs/src/option/unicode.c 
+../chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.c 
 
 OBJS += \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/cc932.o \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/cc936.o \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/cc949.o \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/cc950.o \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/ccsbcs.o \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.o \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/unicode.o 
+./chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.o 
 
 C_DEPS += \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/cc932.d \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/cc936.d \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/cc949.d \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/cc950.d \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/ccsbcs.d \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.d \
-./chip_header/Middlewares/Third_Party/FatFs/src/option/unicode.d 
+./chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -39,7 +21,7 @@ chip_header/Middlewares/Third_Party/FatFs/src/option/%.o chip_header/Middlewares
 clean: clean-chip_header-2f-Middlewares-2f-Third_Party-2f-FatFs-2f-src-2f-option
 
 clean-chip_header-2f-Middlewares-2f-Third_Party-2f-FatFs-2f-src-2f-option:
-	-$(RM) ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc932.cyclo ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc932.d ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc932.o ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc932.su ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc936.cyclo ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc936.d ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc936.o ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc936.su ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc949.cyclo ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc949.d ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc949.o ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc949.su ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc950.cyclo ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc950.d ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc950.o ./chip_header/Middlewares/Third_Party/FatFs/src/option/cc950.su ./chip_header/Middlewares/Third_Party/FatFs/src/option/ccsbcs.cyclo ./chip_header/Middlewares/Third_Party/FatFs/src/option/ccsbcs.d ./chip_header/Middlewares/Third_Party/FatFs/src/option/ccsbcs.o ./chip_header/Middlewares/Third_Party/FatFs/src/option/ccsbcs.su ./chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.cyclo ./chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.d ./chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.o ./chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.su ./chip_header/Middlewares/Third_Party/FatFs/src/option/unicode.cyclo ./chip_header/Middlewares/Third_Party/FatFs/src/option/unicode.d ./chip_header/Middlewares/Third_Party/FatFs/src/option/unicode.o ./chip_header/Middlewares/Third_Party/FatFs/src/option/unicode.su
+	-$(RM) ./chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.cyclo ./chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.d ./chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.o ./chip_header/Middlewares/Third_Party/FatFs/src/option/syscall.su
 
 .PHONY: clean-chip_header-2f-Middlewares-2f-Third_Party-2f-FatFs-2f-src-2f-option
 

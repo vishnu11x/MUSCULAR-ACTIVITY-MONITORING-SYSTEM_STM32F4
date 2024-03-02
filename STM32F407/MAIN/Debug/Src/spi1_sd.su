@@ -1,0 +1,5 @@
+../Src/spi1_sd.c:19:6:spi1_init	4	static
+../Src/spi1_sd.c:80:6:spi1_send	24	static
+../Src/spi1_sd.c:103:6:spi1_receive	16	static
+../Src/spi1_sd.c:114:6:sc_enable	4	static
+../Src/spi1_sd.c:119:6:sc_disable	4	static

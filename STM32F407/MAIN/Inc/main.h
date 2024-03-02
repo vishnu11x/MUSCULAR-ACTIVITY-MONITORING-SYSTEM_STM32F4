@@ -17,7 +17,12 @@
 #include "delayms.h"   // User defined header file for delay
 #include "signal_pros.h"  // User defined header file for signal processing
 #include "clock.h"   // To config clock
-#include "sdcard_spi.h"
-#include "uart2.h"
+#include "uart2.h"  // User defined header file for UART
+/* FATfs header files */
+#include <ff.h>
+#include <diskio.h>
+#include <spi1_sd.h>
+
+
 
 #endif /* MAIN_H_ */
