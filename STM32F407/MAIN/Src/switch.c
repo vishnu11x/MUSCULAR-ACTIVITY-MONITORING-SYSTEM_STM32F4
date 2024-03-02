@@ -5,9 +5,7 @@
  *      Author: vishnu
  */
 
-#include <stdint.h>
 #include "switch.h"
-#include <stm32f4xx.h>
 
 
 #define SWT1    ( 1U<< 0)

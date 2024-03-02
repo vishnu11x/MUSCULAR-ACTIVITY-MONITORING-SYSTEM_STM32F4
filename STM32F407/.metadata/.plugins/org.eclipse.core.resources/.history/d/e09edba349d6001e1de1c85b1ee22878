@@ -1,0 +1,25 @@
+/*
+ * uart2.c
+ *
+ *  Created on: Feb 28, 2024
+ *      Author: vishnu
+ */
+
+#include <uart2.h>
+
+//----------------------------------------------------------------------------------------------
+
+/* FUNCTION DEFINTION */
+
+/*Clock access enabled for GPIOA */
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+
+  /*PA2 set to alternate function mode */
+  GPIOA->MODER |= GPIO_MODER_MODE2_1;
+  GPIOA->MODER &= ~GPIO_MODER_MODE2_0;
+
+  /* PA2 set to AF7 */
+  /*GPIOA->AFR[0] is the low register*/
+  GPIOA->AFR[0] |=  GPIO_AFRL_AFRL2_2 | GPIO_AFRL_AFRL2_1 | GPIO_AFRL_AFRL2_0;
+  GPIOA->AFR[0] &= ~GPIO_AFRL_AFRL2_3;
+}

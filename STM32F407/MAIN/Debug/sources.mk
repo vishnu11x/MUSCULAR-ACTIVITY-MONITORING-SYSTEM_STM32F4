@@ -24,4 +24,5 @@ C_DEPS :=
 SUBDIRS := \
 Src \
 Startup \
+chip_header/Middlewares/Third_Party/FatFs/src \
 

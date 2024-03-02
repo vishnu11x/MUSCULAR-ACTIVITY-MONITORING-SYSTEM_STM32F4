@@ -1,0 +1,5 @@
+../Src/sdcard_spi.c:19:6:spi1_init	4	static
+../Src/sdcard_spi.c:80:6:spi1_send	24	static
+../Src/sdcard_spi.c:103:6:spi1_receive	16	static
+../Src/sdcard_spi.c:114:6:sc_enable	4	static
+../Src/sdcard_spi.c:119:6:sc_disable	4	static

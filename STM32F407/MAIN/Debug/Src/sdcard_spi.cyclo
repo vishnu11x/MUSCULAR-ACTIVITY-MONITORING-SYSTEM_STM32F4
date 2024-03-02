@@ -1,0 +1,5 @@
+../Src/sdcard_spi.c:19:6:spi1_init	1
+../Src/sdcard_spi.c:80:6:spi1_send	5
+../Src/sdcard_spi.c:103:6:spi1_receive	3
+../Src/sdcard_spi.c:114:6:sc_enable	1
+../Src/sdcard_spi.c:119:6:sc_disable	1
