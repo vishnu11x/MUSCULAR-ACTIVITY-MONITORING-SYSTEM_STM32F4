@@ -1,0 +1,57 @@
+/*
+ * signal_pros.h
+ *
+ *  Created on: Feb 12, 2024
+ *      Author: vishnu
+ */
+
+#ifndef SIGNAL_PROS_H_
+#define SIGNAL_PROS_H_
+
+
+
+#include <stdint.h>
+#include <stm32f4xx.h>
+#include <arm_math.h>
+
+//-------------------------------------------------------------------------------------------------------
+
+#define fltr_len 31
+
+
+extern float32_t HPF_25HZ_KERNEL[31] = {-0.001566,-0.0018215,-0.0024966,-0.0035965,-0.0051015,
+		-0.0069667,-0.0091244,-0.011487,-0.013951,-0.016404,-0.01873,-0.020816,-0.022558,
+		-0.02387,-0.024685,0.9735,-0.024685,-0.02387,-0.022558,-0.020816,-0.01873,-0.016404,
+		-0.013951,-0.011487,-0.0091244,-0.0069667,-0.0051015,-0.0035965,-0.0024966,-0.0018215,-0.001566
+};
+
+extern float32_t LPF_450HZ_KERNEl[31] = {0.0011976,0.0016526,-0.0013283,-0.0042247,0.0010487,
+		0.0098447,0.0021961,-0.018572,-0.012112,0.02921,0.034582,-0.039563,-0.086033,0.047116,
+		0.31051,0.44896,0.31051,0.047116,-0.086033,-0.039563,0.034582,0.02921,-0.012112,
+		-0.018572,0.0021961,0.0098447,0.0010487,-0.0042247,-0.0013283,0.0016526,0.0011976
+};
+
+typedef struct{
+	float32_t buff[fltr_len];
+	uint32_t buff_indx;
+	float32_t *kernel;
+	uint32_t kernel_len;
+	float32_t out;
+}fir_filter_type;
+
+//------------------------------------------------------------------------------------------------------------------------
+
+
+/* FUNCTION DECLARATION */
+
+void fpu_enable(void); // To enable FPU
+
+void convolution( float32_t * source_sig_arry, float32_t * destn_signal_arry, float32_t * imp_response_arry,
+		          uint32_t source_sig_len, uint32_t imp_sig_len); // To perform covolution
+
+void fir_fltr_init(fir_filter_type *fir, float32_t * fltr_kernel, uint32_t fltr_kernel_len); // Function to real-time  filter function
+
+float32_t fir_fltr_run (fir_filter_type *fir, float32_t samples);  // Function to apply rela-time filter function
+
+
+#endif /* SIGNAL_PROS_H_ */

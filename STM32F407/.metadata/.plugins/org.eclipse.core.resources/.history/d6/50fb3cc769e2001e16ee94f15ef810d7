@@ -1,0 +1,15 @@
+/*
+ * filter.c
+ *
+ *  Created on: Mar 15, 2024
+ *      Author: vishnu
+ */
+
+#include"filter.h"
+
+void fir_fltr_init(fir_filter *fir){
+
+
+}
+
+

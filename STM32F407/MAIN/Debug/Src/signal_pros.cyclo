@@ -1,2 +1,4 @@
-../Src/signal_pros.c:27:6:fpu_enable	1
-../Src/signal_pros.c:36:6:convolution	4
+../Src/signal_pros.c:30:6:fpu_enable	1
+../Src/signal_pros.c:39:6:convolution	4
+../Src/signal_pros.c:65:6:fir_fltr_init	2
+../Src/signal_pros.c:83:11:fir_fltr_run	4

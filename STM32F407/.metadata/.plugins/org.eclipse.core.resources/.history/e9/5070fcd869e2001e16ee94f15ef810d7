@@ -1,0 +1,31 @@
+/*
+ * filter.c
+ *
+ *  Created on: Mar 15, 2024
+ *      Author: vishnu
+ */
+
+#include"filter.h"
+
+//----------------------------------------------------------------------------------------------------
+
+/* FUNCTION DEFINITION */
+
+// To Initialize fir filter
+void fir_fltr_init(fir_filter *fir){
+
+	// clear buffer
+	for( i=0; i<fltr_len; i++){
+
+		fir -> buff[i] = 0;
+	}
+
+	fir -> buff_indx = 0;  // Reset buffer index
+
+	fir -> out = 0.00f;  // Clear output
+
+}
+
+
+
+

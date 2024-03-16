@@ -1,0 +1,26 @@
+/*
+ * filter.h
+ *
+ *  Created on: Mar 15, 2024
+ *      Author: vishnu
+ */
+
+#ifndef FILTER_H_
+#define FILTER_H_
+
+#include <stdio.h>
+#include <arm_math.h>
+
+#define fltr_len 30
+
+typedef struct{
+	float32_t buff[fltr_len];
+	uint32_t buff_indx;
+	float32_t *kernel;
+	uint32_t kernel_len;
+	float32_t out;
+}fir_filter_type;
+
+
+
+#endif /* FILTER_H_ */
