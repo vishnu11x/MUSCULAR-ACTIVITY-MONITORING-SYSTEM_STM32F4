@@ -1,0 +1,51 @@
+/*
+ * filter.c
+ *
+ *  Created on: Mar 15, 2024
+ *      Author: vishnu
+ */
+
+#include"filter.h"
+
+//----------------------------------------------------------------------------------------------------
+
+/* FUNCTION DEFINITION */
+
+
+void fir_fltr_init(fir_filter_type *fir, float32_t * fltr_kernel, uint32_t fltr_krenel_len){
+
+	fir -> kernel = fltr_kernel;  // Set filter kernel
+
+	fir ->
+
+	// clear buffer
+	for(int i=0; i<fltr_len; i++){
+
+		fir -> buff[i] = 0;
+	}
+
+	fir -> buff_indx = 0;  // Reset buffer index
+
+	fir -> out = 0.00f;  // Clear output
+
+}
+
+float32_t fir_fltr_run (fir_filter_type *fir, float32_t samples){
+
+	fir -> buff[fir->buff_indx] = samples;  // Store latest sample in the buffer
+
+	fir -> buff_indx++;  // Increment buff index
+
+	if(fir -> buff_indx == fltr_len){
+
+		fir -> buff_indx =0;
+	}
+}
+
+
+
+
+
+
+
+

@@ -1,2 +1,4 @@
-../Src/signal_pros.c:27:6:fpu_enable	4	static
-../Src/signal_pros.c:36:6:convolution	40	static
+../Src/signal_pros.c:30:6:fpu_enable	4	static
+../Src/signal_pros.c:39:6:convolution	40	static
+../Src/signal_pros.c:65:6:fir_fltr_init	32	static
+../Src/signal_pros.c:83:11:fir_fltr_run	24	static

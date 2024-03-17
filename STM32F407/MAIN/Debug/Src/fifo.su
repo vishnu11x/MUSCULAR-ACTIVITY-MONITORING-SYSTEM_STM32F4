@@ -1,0 +1,3 @@
+../Src/fifo.c:16:6:rx_fifo_init	4	static
+../Src/fifo.c:20:9:rx_fifo_put	24	static
+../Src/fifo.c:41:9:rx_fifo_get	16	static
