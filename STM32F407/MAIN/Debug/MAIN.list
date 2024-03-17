@@ -31,23 +31,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .comment      00000043  00000000  00000000  000202f0  2**0
                   CONTENTS, READONLY
- 14 .debug_info   0000217d  00000000  00000000  00020333  2**0
+ 14 .debug_info   0000216c  00000000  00000000  00020333  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_abbrev 00000a9f  00000000  00000000  000224b0  2**0
+ 15 .debug_abbrev 00000a9f  00000000  00000000  0002249f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_aranges 00000220  00000000  00000000  00022f50  2**3
+ 16 .debug_aranges 00000220  00000000  00000000  00022f40  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_rnglists 0000016c  00000000  00000000  00023170  2**0
+ 17 .debug_rnglists 0000016c  00000000  00000000  00023160  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_macro  0001b6e7  00000000  00000000  000232dc  2**0
+ 18 .debug_macro  0001b25e  00000000  00000000  000232cc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   00005167  00000000  00000000  0003e9c3  2**0
+ 19 .debug_line   00005167  00000000  00000000  0003e52a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    00090ac9  00000000  00000000  00043b2a  2**0
+ 20 .debug_str    00090ac2  00000000  00000000  00043691  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  00001b38  00000000  00000000  000d45f4  2**2
+ 21 .debug_frame  00001b38  00000000  00000000  000d4154  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000093  00000000  00000000  000d612c  2**0
+ 22 .debug_line_str 00000093  00000000  00000000  000d5c8c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1532,8 +1532,8 @@ void delayms(int delay){
  8001028:	0002903f 	.word	0x0002903f
 
 0800102c <main>:
-char buff[31];
-char buff_1[31];
+fir_filter_type fir_hpf;
+char buff[fltr_len];
 //----------------------------------------------------------------------------------------
 /* MAIN FUNCTION */
 
@@ -1552,12 +1552,12 @@ int main(){
 	uart2_init();  // Initialize UART2
  8001040:	f000 f9e8 	bl	8001414 <uart2_init>
 	// initialize Filter function
-	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , 31);
+	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , fltr_len);
  8001044:	221f      	movs	r2, #31
  8001046:	4920      	ldr	r1, [pc, #128]	; (80010c8 <main+0x9c>)
  8001048:	4820      	ldr	r0, [pc, #128]	; (80010cc <main+0xa0>)
  800104a:	f000 f87b 	bl	8001144 <fir_fltr_init>
-	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, 31);
+	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, fltr_len);
  800104e:	221f      	movs	r2, #31
  8001050:	491f      	ldr	r1, [pc, #124]	; (80010d0 <main+0xa4>)
  8001052:	4820      	ldr	r0, [pc, #128]	; (80010d4 <main+0xa8>)

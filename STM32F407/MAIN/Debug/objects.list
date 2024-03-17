@@ -1,6 +1,7 @@
 "./Src/adc.o"
 "./Src/clock.o"
 "./Src/delayms.o"
+"./Src/fifo.o"
 "./Src/main.o"
 "./Src/signal_pros.o"
 "./Src/spi1_sd.o"

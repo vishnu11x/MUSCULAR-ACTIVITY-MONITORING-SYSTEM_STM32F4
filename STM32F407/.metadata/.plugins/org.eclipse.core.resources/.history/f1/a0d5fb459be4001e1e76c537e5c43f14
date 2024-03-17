@@ -19,12 +19,13 @@
 #include "main.h"
 
 extern volatile float32_t sensor_data;
-extern float32_t LPF_450HZ_KERNEL[fltr_len];
-extern float32_t HPF_25HZ_KERNEL[fltr_len];
+extern float32_t LPF_450HZ_KERNEL[31];
+extern float32_t HPF_25HZ_KERNEL[31];
 volatile float32_t fltr_sensor_data;
 fir_filter_type fir_lpf;
 fir_filter_type fir_hpf;
-char buff[fltr_len];
+char buff[31];
+char buff_1[31];
 //----------------------------------------------------------------------------------------
 /* MAIN FUNCTION */
 
@@ -36,8 +37,8 @@ int main(){
 	SWT1_init();  // Initialize Switch
 	uart2_init();  // Initialize UART2
 	// initialize Filter function
-	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , fltr_len);
-	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, fltr_len);
+	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , 31);
+	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, 31);
 
 
 
