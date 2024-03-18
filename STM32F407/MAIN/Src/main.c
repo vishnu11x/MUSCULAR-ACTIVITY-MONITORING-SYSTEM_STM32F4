@@ -22,13 +22,11 @@ extern volatile float32_t sensor_data;
 volatile float32_t lpf_data;
 volatile float32_t hpf_data;
 
-extern float32_t LPF_450HZ_KERNEL[fltr_len];
-extern float32_t HPF_25HZ_KERNEL[fltr_len];
+extern float32_t BPF_25_450HZ [FLTR_LEN];
 
-fir_filter_type fir_lpf;
-fir_filter_type fir_hpf;
+float32_t bpf_data[ FLTR_LEN + RXFIFOSIZE - 1];
 
-float32_t rx_data[100];
+float32_t rx_data[RXFIFOSIZE];
 float32_t rx_temp;
 
 //----------------------------------------------------------------------------------------
@@ -40,10 +38,6 @@ int main(){
 	SWT1_init();  // Initialize Switch
 	uart2_init();  // Initialize UART2
 	rx_fifo_init();  // Initialize FIFO receive
-
-	// initialize Filter function
-	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , fltr_len);
-	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, fltr_len);
 
 
 	ADC_init();  // Initialize ADC
@@ -59,20 +53,21 @@ int main(){
 
 		enable_adc();
 
-		for( int i=0; i < 100; i++){
+		for( int i=0; i < RXFIFOSIZE; i++){
 
 			rx_fifo_put(sensor_data);
 
 		}
 
-		for(int j = 0; j < 100; j++){
+		for(int j = 0; j < RXFIFOSIZE; j++){
 
 			rx_fifo_get(&rx_temp);
 			rx_data[j] = rx_temp;
 		}
-		//hpf_data = fir_fltr_run(&fir_hpf, sensor_data);
-		//lpf_data = fir_fltr_run(&fir_lpf, hpf_data);
-		//delayms(1);
+
+		arm_conv_f32( (float32_t*) BPF_25_450HZ, (uint32_t) FLTR_LEN,
+				(float32_t*) rx_data, (uint32_t) RXFIFOSIZE, (float32_t*) bpf_data);
+
 		/* Wait for input from switch*/
 		if( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1){
 			disable_adc();

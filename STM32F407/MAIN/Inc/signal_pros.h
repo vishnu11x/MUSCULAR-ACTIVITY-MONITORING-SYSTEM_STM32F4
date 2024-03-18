@@ -16,11 +16,11 @@
 
 //-------------------------------------------------------------------------------------------------------
 
-#define fltr_len 31
+#define FLTR_LEN 31
 
 
 typedef struct{
-	float32_t buff[fltr_len];
+	float32_t buff[FLTR_LEN];
 	uint32_t buff_indx;
 	float32_t *kernel;
 	uint32_t kernel_len;
