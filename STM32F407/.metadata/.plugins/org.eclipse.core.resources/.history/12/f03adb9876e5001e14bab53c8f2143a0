@@ -22,12 +22,11 @@ extern volatile float32_t sensor_data;
 volatile float32_t lpf_data;
 volatile float32_t hpf_data;
 volatile float32_t temp_data;
-volatile float32_t rms;
 
 extern float32_t BPF_25_450HZ [FLTR_LEN];
 
 float32_t bpf_data[ FLTR_LEN + RXFIFOSIZE - 1];
-float32_t  rms_value[1];
+float32_t  rms_value[0];
 
 float32_t rx_data[RXFIFOSIZE];
 float32_t rx_temp;
@@ -71,10 +70,15 @@ int main(){
 		arm_conv_f32( (float32_t*) BPF_25_450HZ, (uint32_t) FLTR_LEN,
 				(float32_t*) rx_data, (uint32_t) RXFIFOSIZE, (float32_t*) bpf_data);
 
+		for(int i=0; i< (FLTR_LEN + RXFIFOSIZE - 1); i++ ){
+
+			temp_data = bpf_data[i];
+
+		}
 
 		arm_rms_f32( (float32_t*)rx_data, (uint32_t)(FLTR_LEN + RXFIFOSIZE - 1) ,
 				(float32_t*) rms_value);
-
+		float32_t rms = rms_value[0];
 
 		/* Wait for input from switch*/
 		if( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1){

@@ -19,51 +19,68 @@
 #include "main.h"
 
 extern volatile float32_t sensor_data;
-extern float32_t LPF_450HZ_KERNEL[fltr_len];
-extern float32_t HPF_25HZ_KERNEL[fltr_len];
-volatile float32_t fltr_sensor_data;
-fir_filter_type fir_lpf;
-fir_filter_type fir_hpf;
-char buff[fltr_len];
+volatile float32_t lpf_data;
+volatile float32_t hpf_data;
+
+extern float32_t BPF_25_450HZ [FLTR_LEN];
+
+float32_t bpf_data[ FLTR_LEN + RXFIFOSIZE - 1];
+float32_t rms_value;
+
+float32_t rx_data[RXFIFOSIZE];
+float32_t rx_temp;
+
 //----------------------------------------------------------------------------------------
 /* MAIN FUNCTION */
 
 int main(){
-
 	clock_max_config();  // Set SysClk 168MHz
 	fpu_enable();  // Enable floating point unit
-	ADC_init();  // Initialize ADC
 	SWT1_init();  // Initialize Switch
 	uart2_init();  // Initialize UART2
-	// initialize Filter function
-	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , fltr_len);
-	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, fltr_len);
-	/* Wait for input from switch*/
-	while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1);
+	rx_fifo_init();  // Initialize FIFO receive
 
+
+	ADC_init();  // Initialize ADC
+	ADC_trigger_init();  // Initialize timer trigger for ADC
+
+
+	/* Wait for input from switch*/
+	while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 0);
+	delayms(200);
 
 
 	while(1){
 
+		enable_adc();
 
+		for( int i=0; i < RXFIFOSIZE; i++){
 
-			ADC_start();  // start ADC
-			fltr_sensor_data = fir_fltr_run(&fir_hpf, sensor_data);
-			fltr_sensor_data = fir_fltr_run(&fir_lpf, fltr_sensor_data);
-			sprintf(buff,"%f \n \r",fltr_sensor_data);
-			uart2_string_write(buff,"\n \r");
-			delayms(1);
-
+			rx_fifo_put(sensor_data);
 
 		}
 
-		ADC_stop();
-	 
+		for(int j = 0; j < RXFIFOSIZE; j++){
 
+			rx_fifo_get(&rx_temp);
+			rx_data[j] = rx_temp;
+		}
 
+		arm_conv_f32( (float32_t*) BPF_25_450HZ, (uint32_t) FLTR_LEN,
+				(float32_t*) rx_data, (uint32_t) RXFIFOSIZE, (float32_t*) bpf_data);
+
+		arm_rms_f32( (float32_t*)rx_data, (uint32_t)(FLTR_LEN + RXFIFOSIZE - 1) ,
+				(float32_t*) rms_value);
+
+		/* Wait for input from switch*/
+		if( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1){
+			disable_adc();
+			break;
+		}
 	}
 
-
 }
+
+
 
 //----------------------------------------------------------------------------------------

@@ -21,13 +21,12 @@
 extern volatile float32_t sensor_data;
 volatile float32_t lpf_data;
 volatile float32_t hpf_data;
-volatile float32_t temp_data;
-volatile float32_t rms;
 
 extern float32_t BPF_25_450HZ [FLTR_LEN];
 
 float32_t bpf_data[ FLTR_LEN + RXFIFOSIZE - 1];
-float32_t  rms_value[1];
+float32_t  rms_value[0];
+float32_t signal[60000];
 
 float32_t rx_data[RXFIFOSIZE];
 float32_t rx_temp;
@@ -50,6 +49,23 @@ int main(){
 	/* Wait for input from switch*/
 	while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 0);
 	delayms(200);
+	for( int i=0; i < 600; i++){
+
+		enable_adc();
+
+				for( int i=0; i < RXFIFOSIZE; i++){
+
+					rx_fifo_put(sensor_data);
+
+				}
+
+				for(int j = 0; j < RXFIFOSIZE; j++){
+
+					rx_fifo_get(&rx_temp);
+					rx_data[j] = rx_temp;
+				}
+
+	}
 
 
 	while(1){
@@ -71,10 +87,8 @@ int main(){
 		arm_conv_f32( (float32_t*) BPF_25_450HZ, (uint32_t) FLTR_LEN,
 				(float32_t*) rx_data, (uint32_t) RXFIFOSIZE, (float32_t*) bpf_data);
 
-
 		arm_rms_f32( (float32_t*)rx_data, (uint32_t)(FLTR_LEN + RXFIFOSIZE - 1) ,
 				(float32_t*) rms_value);
-
 
 		/* Wait for input from switch*/
 		if( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1){
