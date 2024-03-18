@@ -31,55 +31,74 @@ void ADC_init (void){
 
 	/* CONFIG ADC */
 	RCC -> APB2ENR |= ( ADC1EN );  // Enable clock to ADC1
-	ADC1 -> CR2 |= ( 1U << 0 );  // Enable ADC1
+	ADC1 -> CR2 &= ~( 1U << 1);  // To Set in single conversion mode
 	ADC1 -> SQR3 = ADC_CH1;  // Select Channel 1 in Sequence
 	ADC1 -> SQR1 = ( 0X00 );  // length of Channel Sequence (1)
 	ADC1 -> CR1 &= ~(( 1U << 24 ) | ( 1U << 25 )); // Set Resolution to 12-bit
 	ADC1 -> CR1 |= ( 1U << 5);  // Enable interrupt for EOC
-	ADC1 -> CR2 |= ( 1U << 28 ) | ( 1U << 29 ); //  Enable external trigger for ADC1
-	ADC1 -> CR2 &= ~(( 1U << 24 ) | ( 1U << 27));// Select TIM2 TRGO event for external trigger
-	ADC1 -> CR2 |= ( 1U << 25) | ( 1U << 25);
+	NVIC_SetPriority( ADC_IRQn,0);  // Set interrupt priority
 	NVIC_EnableIRQ ( ADC_IRQn);  // Enable interrupt in NVIC
+
+}
+
+void ADC_trigger_init(void){
 
 	/* CONFIG TIMER FOR TRIGGER (1000HZ) */
 	RCC -> APB1ENR |= ( 1U << 0); // Enable clock for TIM2
-	TIM2 -> PSC = 41999;  // Set prescaler for 10000Hz timer frequency
-	TIM2 -> ARR = 9;  // Set auto reload value
-	TIM2 -> CR2 &= ~(( 1U << 4) | ( 1U << 6));  // Select update event for TRGO
-	TIM2 -> CR2 |= ( 1U << 5);
-	TIM2 -> CR1 |= ( 1U << 0);  // Enable TIM2
+	TIM2 -> PSC = (4200 - 1);  // Set prescaler for 10000Hz timer frequency
+	TIM2 -> ARR = (10 - 1);  // Set auto reload value
+	TIM2 -> CNT = 0;
+	TIM2 -> DIER |= ( 1U << 0);  // Enable update interrupt
+	NVIC_SetPriority( TIM2_IRQn,1);  // Set interrupt priority
+	NVIC_EnableIRQ( TIM2_IRQn);  // Enable interrupt in NVIC
 }
 
+void enable_adc(void){
+	ADC1 -> CR2 |= ( 1U << 0 );  // Enable ADC1
+	TIM2 -> CR1 |= ( 1U << 0);  // Enable TIM2
+}
 // To start conversion
 void ADC_start (void){
 
-	ADC1 -> CR2 &= ~( 1U << 1);  // To Set in single conversion mode
 	ADC1 -> CR2 |= ( 1U << 30);  // To start the ADC conversion
-	ADC_stop();                  // Stop ADC
+
 }
 
-void ADC_stop (void){
+void disable_adc (void){
 
 	ADC1 -> CR2 &= (~( 1U << 30 ));  // To stop ADC conversion
+	TIM2 -> CR1 &= ~( 1U << 0);  // Disable TIM2
 }
 
-float32_t ADC_read (void){
+
+float32_t adc_callback(void){
 
 	adc_data = (ADC1->DR);
 	sensor_data = ( adc_data * ADC_VREF) / ADC_RES ;  // Equation to convert to volts
 	return (sensor_data);
+}
 
+void tim_callback(void){
+
+	ADC1 -> CR2 |= ( 1U << 30);  // To start the ADC conversion
 
 }
 
-
-void ADC_IRQHandler(void){
+extern void ADC_IRQHandler(void){
 
 	if( ((ADC1->SR) & ( 1U << 1) ) != 0){
 
 		ADC1 -> SR &= ~( 1U << 1);
-		ADC_read();
+		adc_callback();
 	}
 }
+extern void TIM2_IRQHandler(void){
+
+	if ( ((TIM2 -> SR) & ( 1U << 0 ))){
+		TIM2 -> SR &= ~( 1U << 0);
+		tim_callback();
+	}
+}
+
 
 

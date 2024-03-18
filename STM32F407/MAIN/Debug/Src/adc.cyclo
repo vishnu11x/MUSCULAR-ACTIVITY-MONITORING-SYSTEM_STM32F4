@@ -1,6 +1,11 @@
 D:/Project/MUSCULAR ACTIVITY MONITORING SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_header/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	2
+D:/Project/MUSCULAR ACTIVITY MONITORING SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_header/CMSIS/Include/core_cm4.h:1814:22:__NVIC_SetPriority	2
 ../Src/adc.c:24:6:ADC_init	1
-../Src/adc.c:54:6:ADC_start	1
-../Src/adc.c:61:6:ADC_stop	1
-../Src/adc.c:66:11:ADC_read	1
-../Src/adc.c:76:6:ADC_IRQHandler	2
+../Src/adc.c:44:6:ADC_trigger_init	1
+../Src/adc.c:56:6:enable_adc	1
+../Src/adc.c:61:6:ADC_start	1
+../Src/adc.c:67:6:disable_adc	1
+../Src/adc.c:74:11:adc_callback	1
+../Src/adc.c:81:6:tim_callback	1
+../Src/adc.c:87:13:ADC_IRQHandler	2
+../Src/adc.c:95:13:TIM2_IRQHandler	2

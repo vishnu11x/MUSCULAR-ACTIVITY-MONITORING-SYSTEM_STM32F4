@@ -1,0 +1,99 @@
+/**
+ ******************************************************************************
+ * @file           : main.c
+ * @author         : VISHNU C S
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2024 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
+
+#include "main.h"
+
+extern volatile float32_t sensor_data;
+extern float32_t LPF_450HZ_KERNEL[fltr_len];
+extern float32_t HPF_25HZ_KERNEL[fltr_len];
+volatile float32_t fltr_sensor_data;
+fir_filter_type fir_lpf;
+fir_filter_type fir_hpf;
+char buff[fltr_len];
+
+static float32_t adc_callback(void);
+static void tim_callback(void);
+//----------------------------------------------------------------------------------------
+/* MAIN FUNCTION */
+
+int main(){
+
+	clock_max_config();  // Set SysClk 168MHz
+	fpu_enable();  // Enable floating point unit
+	SWT1_init();  // Initialize Switch
+	uart2_init();  // Initialize UART2
+	// initialize Filter function
+	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , fltr_len);
+	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, fltr_len);
+	ADC_init();  // Initialize ADC
+	ADC_trigger_init();
+
+
+
+
+
+
+	while(1){
+
+		/* Wait for input from switch*/
+			while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 0);
+			fltr_sensor_data = fir_fltr_run(&fir_hpf, sensor_data);
+			fltr_sensor_data = fir_fltr_run(&fir_lpf, fltr_sensor_data);
+			sprintf(buff,"%f \n \r",fltr_sensor_data);
+			uart2_string_write(buff,"\n \r");
+			delayms(1);
+			//ADC_stop();
+	 
+
+
+	}
+
+
+}
+
+static float32_t adc_callback(void){
+
+	adc_data = (ADC1->DR);
+	sensor_data = ( adc_data * ADC_VREF) / ADC_RES ;  // Equation to convert to volts
+	return (sensor_data);
+
+}
+
+static void tim_callback(void){
+
+	ADC1 -> CR2 |= ( 1U << 30);  // To start the ADC conversion
+
+}
+
+void ADC_IRQHandler(void){
+
+	if( ((ADC1->SR) & ( 1U << 1) ) != 0){
+
+		ADC1 -> SR &= ~( 1U << 1);
+		adc_callback();
+	}
+}
+void TIM2_IRQHandler(void){
+
+	if ( ((TIM2 -> SR) & ( 1U << 0 ))){
+		TIM2 -> SR &= ~( 1U << 0);
+		tim_callback();
+	}
+}
+
+//----------------------------------------------------------------------------------------
