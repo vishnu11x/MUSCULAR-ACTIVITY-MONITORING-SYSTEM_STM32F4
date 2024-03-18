@@ -38,7 +38,7 @@ Src/main.o: ../Src/main.c ../Inc/main.h \
  D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_header/CMSIS/DSP/Include/dsp/support_functions.h \
  D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_header/CMSIS/DSP/Include/dsp/quaternion_math_functions.h \
  ../Inc/adc.h ../Inc/switch.h ../Inc/delayms.h ../Inc/signal_pros.h \
- ../Inc/clock.h ../Inc/uart2.h \
+ ../Inc/clock.h ../Inc/uart2.h ../Inc/fifo.h \
  D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_header/Middlewares/Third_Party/FatFs/Inc/ff.h \
  D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_header/Middlewares/Third_Party/FatFs/Inc/integer.h \
  D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_header/Middlewares/Third_Party/FatFs/Inc/ffconf.h \
@@ -89,6 +89,7 @@ D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-S
 ../Inc/signal_pros.h:
 ../Inc/clock.h:
 ../Inc/uart2.h:
+../Inc/fifo.h:
 D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_header/Middlewares/Third_Party/FatFs/Inc/ff.h:
 D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_header/Middlewares/Third_Party/FatFs/Inc/integer.h:
 D:/Project/MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_header/Middlewares/Third_Party/FatFs/Inc/ffconf.h:

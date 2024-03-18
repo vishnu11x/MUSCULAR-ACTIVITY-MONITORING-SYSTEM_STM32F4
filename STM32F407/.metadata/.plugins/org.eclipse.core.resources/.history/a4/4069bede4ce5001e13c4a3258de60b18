@@ -19,52 +19,57 @@
 #include "main.h"
 
 extern volatile float32_t sensor_data;
-extern float32_t LPF_450HZ_KERNEL[31];
-extern float32_t HPF_25HZ_KERNEL[31];
-volatile float32_t fltr_sensor_data;
+extern float32_t LPF_450HZ_KERNEL[fltr_len];
+extern float32_t HPF_25HZ_KERNEL[fltr_len];
+volatile float32_t lpf_data;
+volatile float32_t hpf_data;
 fir_filter_type fir_lpf;
 fir_filter_type fir_hpf;
+char buff[fltr_len];
+
+
 
 //----------------------------------------------------------------------------------------
 /* MAIN FUNCTION */
 
 int main(){
-
 	clock_max_config();  // Set SysClk 168MHz
 	fpu_enable();  // Enable floating point unit
-	ADC_init();  // Initialize ADC
 	SWT1_init();  // Initialize Switch
 	uart2_init();  // Initialize UART2
+
 	// initialize Filter function
-	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , 31);
-	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, 31);
+	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , fltr_len);
+	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, fltr_len);
+
+
+	ADC_init();  // Initialize ADC
+	ADC_trigger_init();  // Initialize timer trigger for ADC
+
+
+	/* Wait for input from switch*/
+	while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 0);
+	delayms(200);
+
+
 
 
 
 	while(1){
 
-
+		enable_adc();
+		hpf_data = fir_fltr_run(&fir_hpf, sensor_data);
+		lpf_data = fir_fltr_run(&fir_lpf, hpf_data);
+		delayms(1);
 		/* Wait for input from switch*/
-		//while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1){
-
-			ADC_start();  // start ADC
-			delayms(1);
-			//fltr_sensor_data = fir_fltr_run(&fir_lpf, sensor_data);
-			fltr_sensor_data = fir_fltr_run(&fir_hpf, sensor_data);
-			delayms(1);
-			uart2_string_write("%d", sensor_data);
-
-
-		//}
-
-		//ADC_stop();
-	 
-
-
+		if( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1){
+			disable_adc();
+			break;
+		}
 	}
-
 
 }
 
-//----------------------------------------------------------------------------------------
 
+
+//----------------------------------------------------------------------------------------

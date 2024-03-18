@@ -19,7 +19,6 @@
 #include "signal_pros.h"  // User defined header file for signal processing
 #include "clock.h"   // User defined header file to configure clock
 #include "uart2.h"  // User defined header file for UART
-#include "fifo.h"  // User defined header file for FIFO
 /* FATfs header files */
 #include <ff.h>
 #include <diskio.h>

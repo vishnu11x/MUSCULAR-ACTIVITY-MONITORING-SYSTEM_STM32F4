@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <arm_math.h>
 
-#define RXFIFOSIZE  100
+#define RXFIFOSIZE  50
 #define RXFIFOFAIL  0
 #define RXFIFOSUCESS 1
 
