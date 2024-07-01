@@ -12,12 +12,12 @@
 
 //----------------------------------------------------------------------------------------
 /* FUNCTION DECLARATION */
-void SWT1_init(void);  // TO SET PA0 as input
+void swt1_init(void);  // TO SET PA0 as input
 
 //----------------------------------------------------------------------------------------
 /*Function definition*/
 
-void SWT1_init(void){
+void swt1_init(void){
 
 	GPIOA-> MODER &= (~( 1U << 0)); // TO set PA0 as input
 	GPIOA-> MODER &= (~( 1U << 1));

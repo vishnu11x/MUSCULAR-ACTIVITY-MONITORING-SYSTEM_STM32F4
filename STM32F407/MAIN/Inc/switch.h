@@ -12,7 +12,7 @@
 #include <stm32f4xx.h>
 
 
-void SWT1_init(void);  // TO SET PA0 as input
+void swt1_init(void);  // TO SET PA0 as input
 
 
 

@@ -25,6 +25,8 @@ volatile float32_t fltr_sensor_data;
 fir_filter_type fir_lpf;
 fir_filter_type fir_hpf;
 char buff[fltr_len];
+int min = 0;
+
 //----------------------------------------------------------------------------------------
 /* MAIN FUNCTION */
 
@@ -32,10 +34,10 @@ int main(){
 
 	clock_max_config();  // Set SysClk 168MHz
 	fpu_enable();  // Enable floating point unit
-	ADC_init();  // Initialize ADC
-	SWT1_init();  // Initialize Switch
-	uart2_init();  // Initialize UART2
-	// initialize Filter function
+	adc_dma_init();  // Initialise ADC
+	swt1_init();  // Initialise Switch
+	uart2_init();  // Initialise UART2
+	// Initialise Filter function
 	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , fltr_len);
 	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, fltr_len);
 
@@ -47,7 +49,7 @@ int main(){
 		/* Wait for input from switch*/
 		while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1){
 
-			ADC_start();  // start ADC
+			adc_start();  // start ADC
 			fltr_sensor_data = fir_fltr_run(&fir_hpf, sensor_data);
 			fltr_sensor_data = fir_fltr_run(&fir_lpf, fltr_sensor_data);
 			sprintf(buff,"%f \n \r",fltr_sensor_data);
@@ -57,7 +59,7 @@ int main(){
 
 		}
 
-		ADC_stop();
+		adc_stop();
 	 
 
 

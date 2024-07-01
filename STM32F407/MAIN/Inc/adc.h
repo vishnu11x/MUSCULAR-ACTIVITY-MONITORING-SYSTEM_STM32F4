@@ -18,11 +18,11 @@ extern volatile float32_t sensor_data;  // To store sensor data in volts
 
 
 /* FUNCTION DECLARATION */
-void ADC_init (void);  // To initialize ADC
-void ADC_start (void); // To start ADC
+void adc_init (void);  // To initialize ADC
+void adc_start (void); // To start ADC
 float32_t ADC_read (void);  // To read raw ADC value and convert it into volts
-void ADC_stop (void);   // To stop ADC
-float32_t ADC_convert( uint16_t raw_adc);  // TO convert raw ADC value to volts
-void ADC_IRQHandler(void);
+void adc_stop (void);   // To stop ADC
+float32_t adc_convert( uint16_t raw_adc);  // TO convert raw ADC value to volts
+void adc_IRQHandler(void);
 
 #endif /* ADC_H_ */

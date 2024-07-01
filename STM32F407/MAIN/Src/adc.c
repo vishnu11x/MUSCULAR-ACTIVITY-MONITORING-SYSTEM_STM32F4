@@ -21,7 +21,7 @@ volatile float32_t sensor_data;
 /*Function definition*/
 
 //To initialize ADC1
-void ADC_init (void){
+void adc_dma_init (void){
 
     /* CONFIG GPIO */
 	RCC -> AHB1ENR |= GPIOAEN;  // Enable clock to GPIOA
@@ -31,39 +31,49 @@ void ADC_init (void){
 
 	/* CONFIG ADC */
 	RCC -> APB2ENR |= ( ADC1EN );  // Enable clock to ADC1
-	ADC1 -> CR2 |= ( 1U << 0 );  // Enable ADC1
 	ADC1 -> SQR3 = ADC_CH1;  // Select Channel 1 in Sequence
 	ADC1 -> SQR1 = ( 0X00 );  // length of Channel Sequence (1)
 	ADC1 -> CR1 &= ~(( 1U << 24 ) | ( 1U << 25 )); // Set Resolution to 12-bit
 	ADC1 -> CR1 |= ( 1U << 5);  // Enable interrupt for EOC
 	ADC1 -> CR2 |= ( 1U << 28 ) | ( 1U << 29 ); //  Enable external trigger for ADC1
-	ADC1 -> CR2 &= ~(( 1U << 24 ) | ( 1U << 27));// Select TIM2 TRGO event for external trigger
+	ADC1 -> CR2 &= ~(( 1U << 24 ) | ( 1U << 27)); // Select TIM2 TRGO event for external trigger
 	ADC1 -> CR2 |= ( 1U << 25) | ( 1U << 25);
+	ADC1 -> CR2 |= (1U << 1) | (1U << 8) | (1U << 9); // Selete to use DMA
 	NVIC_EnableIRQ ( ADC_IRQn);  // Enable interrupt in NVIC
 
 	/* CONFIG TIMER FOR TRIGGER (1000HZ) */
 	RCC -> APB1ENR |= ( 1U << 0); // Enable clock for TIM2
-	TIM2 -> PSC = 41999;  // Set prescaler for 10000Hz timer frequency
-	TIM2 -> ARR = 9;  // Set auto reload value
+	TIM2 -> PSC = (8400 - 1);  // Set prescaler for 10000Hz timer frequency
+	TIM2 -> ARR = (10-1);  // Set auto reload value
 	TIM2 -> CR2 &= ~(( 1U << 4) | ( 1U << 6));  // Select update event for TRGO
 	TIM2 -> CR2 |= ( 1U << 5);
 	TIM2 -> CR1 |= ( 1U << 0);  // Enable TIM2
+
+	/* CONFIG DMA */
+	RCC -> AHB1ENR |= (1U << 22);  // Enable clock for DMA
+	DMA2_Stream0 -> CR = 0;  // Disable DMA stream
+	while( DMA2_Stream0 -> CR & (1U << 0)){}  // Wait till stream is disable
+
+
+	ADC1 -> CR2 |= ( 1U << 0 );  // Enable ADC1
+
 }
 
+
 // To start conversion
-void ADC_start (void){
+void adc_start (void){
 
 	ADC1 -> CR2 &= ~( 1U << 1);  // To Set in single conversion mode
 	ADC1 -> CR2 |= ( 1U << 30);  // To start the ADC conversion
-	ADC_stop();                  // Stop ADC
+	adc_stop();                  // Stop ADC
 }
 
-void ADC_stop (void){
+void adc_stop (void){
 
 	ADC1 -> CR2 &= (~( 1U << 30 ));  // To stop ADC conversion
 }
 
-float32_t ADC_read (void){
+float32_t adc_read (void){
 
 	adc_data = (ADC1->DR);
 	sensor_data = ( adc_data * ADC_VREF) / ADC_RES ;  // Equation to convert to volts
@@ -73,7 +83,7 @@ float32_t ADC_read (void){
 }
 
 
-void ADC_IRQHandler(void){
+void adc_IRQHandler(void){
 
 	if( ((ADC1->SR) & ( 1U << 1) ) != 0){
 

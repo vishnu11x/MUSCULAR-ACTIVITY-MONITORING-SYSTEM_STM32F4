@@ -38,12 +38,7 @@ Src/main.o: ../Src/main.c ../Inc/main.h \
  D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Drivers/CMSIS/DSP/Include/dsp/support_functions.h \
  D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Drivers/CMSIS/DSP/Include/dsp/quaternion_math_functions.h \
  ../Inc/adc.h ../Inc/switch.h ../Inc/delayms.h ../Inc/signal_pros.h \
- ../Inc/clock.h ../Inc/uart2.h \
- D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Middlewares/Third_Party/FatFs/Inc/ff.h \
- D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Middlewares/Third_Party/FatFs/Inc/integer.h \
- D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Middlewares/Third_Party/FatFs/Inc/ffconf.h \
- D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Middlewares/Third_Party/FatFs/Inc/diskio.h \
- ../Inc/spi1_sd.h
+ ../Inc/clock.h ../Inc/uart2.h
 ../Inc/main.h:
 D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h:
 D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h:
@@ -89,8 +84,3 @@ D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_
 ../Inc/signal_pros.h:
 ../Inc/clock.h:
 ../Inc/uart2.h:
-D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Middlewares/Third_Party/FatFs/Inc/ff.h:
-D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Middlewares/Third_Party/FatFs/Inc/integer.h:
-D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Middlewares/Third_Party/FatFs/Inc/ffconf.h:
-D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Middlewares/Third_Party/FatFs/Inc/diskio.h:
-../Inc/spi1_sd.h:

@@ -12,6 +12,9 @@
 #include <stdint.h>
 #include <stm32f4xx.h>
 
+#define TIM5EN  (1U << 3)  // To enable TIMER 5
+
+
 
 void delayms(int delay);  // To create delay in ms
 

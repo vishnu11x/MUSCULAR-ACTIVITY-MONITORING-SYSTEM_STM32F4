@@ -8,25 +8,25 @@
 #include "delayms.h"
 
 
-//----------------------------------------------------------------------------------------
-/* FUNCTION DECLARATION */
-void delayms(int delay);  // To create delay in ms
-
 
 //-----------------------------------------------------------------------------------------
 
 // To create delay in ms
 void delayms(int delay){
 
-	SysTick -> LOAD = 167999;  // no. of clk per milliseconds
-	SysTick -> VAL = 0;  //  clear current value
-	SysTick -> CTRL |= ( 1U << 0 ) | ( 1U << 2); // Enable clock and systick
+	RCC -> APB1ENR |= (TIM5EN);
+	TIM5 -> PSC = (8400 - 1);  // Set prescaler for 10000Hz timer frequency
+	TIM5 -> ARR = (10-1);  // Set auto reload value
+	TIM5 -> CNT = 0;  // Clear Counter
+	TIM5 -> CR1 |= ( 1U << 0);  // Enable TIMER 5
 
-	for( int i=0; i < delay; i++){
+	for (int i = 0; i < delay; i++) {
 
-		while(((SysTick -> CTRL ) & ( 1U << 16 )) == 0);  // To check count flag is high
+		while(!(TIM5 -> SR & (1U << 0))){}
+		TIM5 -> SR &= ~(1U << 0);
+
 	}
 
-	SysTick -> CTRL =  0;  // reset count flag
+	TIM5 -> CR1 &= ~( 1U << 0);  // Disable TIMER 5
 
 }
