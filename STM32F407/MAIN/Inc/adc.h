@@ -12,17 +12,18 @@
 #include <stm32f4xx.h>  // Library for STM32f407
 #include <arm_math.h>
 
-extern volatile uint16_t adc_data;  //  To store raw ADC value
+
+#define ADC_VREF         3.3f         // ADC reference voltage
+#define ADC_RES          (float)(pow(2,12)-1)  // Resolution of ADC (12-bit)
+
+#define NUM_SAMPLES      10
+
+extern uint16_t adc_rawdata[NUM_SAMPLES];  //  To store raw ADC value
 extern volatile float32_t sensor_data;  // To store sensor data in volts
 
 
-
 /* FUNCTION DECLARATION */
-void adc_init (void);  // To initialize ADC
-void adc_start (void); // To start ADC
-float32_t ADC_read (void);  // To read raw ADC value and convert it into volts
-void adc_stop (void);   // To stop ADC
-float32_t adc_convert( uint16_t raw_adc);  // TO convert raw ADC value to volts
-void adc_IRQHandler(void);
-
+void adc_dma_init (void);  // To initialize ADC
+void adc_start (void); // To start ADC1
+void adc_stop (void);  // To stop ADC1
 #endif /* ADC_H_ */

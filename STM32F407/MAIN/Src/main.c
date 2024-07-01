@@ -18,14 +18,10 @@
 
 #include "main.h"
 
+extern uint16_t adc_rawdata[NUM_SAMPLES];
 extern volatile float32_t sensor_data;
-extern float32_t LPF_450HZ_KERNEL[fltr_len];
-extern float32_t HPF_25HZ_KERNEL[fltr_len];
-volatile float32_t fltr_sensor_data;
-fir_filter_type fir_lpf;
-fir_filter_type fir_hpf;
-char buff[fltr_len];
-int min = 0;
+
+
 
 //----------------------------------------------------------------------------------------
 /* MAIN FUNCTION */
@@ -37,33 +33,23 @@ int main(){
 	adc_dma_init();  // Initialise ADC
 	swt1_init();  // Initialise Switch
 	uart2_init();  // Initialise UART2
-	// Initialise Filter function
-	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , fltr_len);
-	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, fltr_len);
+
+
+	/* Wait for input from switch*/
+	//while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1);
+	adc_start();  // start ADC
+
 
 
 
 	while(1){
 
 
-		/* Wait for input from switch*/
-		while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1){
-
-			adc_start();  // start ADC
-			fltr_sensor_data = fir_fltr_run(&fir_hpf, sensor_data);
-			fltr_sensor_data = fir_fltr_run(&fir_lpf, fltr_sensor_data);
-			sprintf(buff,"%f \n \r",fltr_sensor_data);
-			uart2_string_write(buff,"\n \r");
-			delayms(1);
-
-
-		}
-
-		adc_stop();
+	}
 	 
 
 
-	}
+
 
 
 }

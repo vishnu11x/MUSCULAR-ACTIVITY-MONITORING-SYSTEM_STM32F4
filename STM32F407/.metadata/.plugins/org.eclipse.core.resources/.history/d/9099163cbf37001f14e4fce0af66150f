@@ -1,0 +1,33 @@
+/*
+ * adc.h
+ *
+ *  Created on: Feb 7, 2024
+ *      Author: vishnu
+ */
+
+#ifndef ADC_H_
+#define ADC_H_
+
+#include <stdint.h>
+#include <stm32f4xx.h>  // Library for STM32f407
+#include <arm_math.h>
+
+extern uint16_t adc_data[1];  //  To store raw ADC value
+extern volatile float32_t sensor_data;  // To store sensor data in volts
+
+#define GPIOAEN          ( 1U << 0 )  //TO enable GPIOA
+#define ADC1EN           ( 1U << 8 )  //TO enable ADC1
+#define ADC_VREF         3.3f         // ADC reference voltage
+#define ADC_RES          (float)(pow(2,12)-1)  // Resolution of ADC (12-bit)
+#define CR2_DMA          (1U << 8)  // Direct memory access mode
+#define CR2_DDS          (1U << 9)  // DMA disable selection
+
+/* FUNCTION DECLARATION */
+void adc_dma_init (void);  // To initialize ADC
+void adc_start (void); // To start ADC
+float32_t ADC_read (void);  // To read raw ADC value and convert it into volts
+void adc_stop (void);   // To stop ADC
+float32_t adc_convert( uint16_t raw_adc);  // TO convert raw ADC value to volts
+void adc_IRQHandler(void);
+
+#endif /* ADC_H_ */

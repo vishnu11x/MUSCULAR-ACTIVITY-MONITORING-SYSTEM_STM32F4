@@ -1,0 +1,64 @@
+/**
+ ******************************************************************************
+ * @file           : main.c
+ * @author         : VISHNU C S
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2024 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
+
+#include "main.h"
+
+extern uint16_t adc_rawdata[1];
+extern volatile float32_t sensor_data;
+extern float32_t LPF_450HZ_KERNEL[fltr_len];
+extern float32_t HPF_25HZ_KERNEL[fltr_len];
+volatile float32_t fltr_sensor_data;
+fir_filter_type fir_lpf;
+fir_filter_type fir_hpf;
+char buff[fltr_len];
+
+
+//----------------------------------------------------------------------------------------
+/* MAIN FUNCTION */
+
+int main(){
+
+	clock_max_config();  // Set SysClk 168MHz
+	fpu_enable();  // Enable floating point unit
+	adc_dma_init();  // Initialise ADC
+	swt1_init();  // Initialise Switch
+	uart2_init();  // Initialise UART2
+	// Initialise Filter function
+	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , fltr_len);
+	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, fltr_len);
+
+	/* Wait for input from switch*/
+	while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1);
+	adc_start();  // start ADC
+
+
+
+
+	while(1){
+
+
+	}
+	 
+
+
+
+
+
+}
+
+//----------------------------------------------------------------------------------------

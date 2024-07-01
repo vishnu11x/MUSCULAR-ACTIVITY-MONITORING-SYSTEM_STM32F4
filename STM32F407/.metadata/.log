@@ -879,3 +879,58 @@ java.lang.NullPointerException: Cannot read the array length because "containers
 
 !ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2024-07-01 19:43:17.031
 !MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 168000000; div: 84
+!SESSION 2024-07-01 19:55:30.723 -----------------------------------------------
+eclipse.buildId=Version 1.15.1
+java.version=17.0.8.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_GB
+Framework arguments:  D:\PROJECTS\Git\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\STM32F407\MAIN\.project
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 D:\PROJECTS\Git\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\STM32F407\MAIN\.project
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 4 4 2024-07-01 19:55:43.668
+!MESSAGE CubeMX plugin appears to be active, Log4j initialization might be too late.
+
+!ENTRY com.st.stm32cube.ide.mcu.informationcenter 1 1 2024-07-01 19:55:43.672
+!MESSAGE Log4j2 initialized with config file D:\PROJECTS\Git\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\STM32F407\.metadata\.log4j2.xml
+
+!ENTRY com.st.stm32cube.ide.mcu.ide 1 1 2024-07-01 19:55:48.585
+!MESSAGE Started RMI Server, listening on port 41337
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-07-01 19:55:50.539
+!MESSAGE Indexed 'MAIN' (13 sources, 104 headers) in 1.55 sec: 7,872 declarations; 15,384 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0086%)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2024-07-01 20:33:14.387
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 168000000; div: 84
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2024-07-01 20:34:13.995
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 168000000; div: 84
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2024-07-01 20:38:40.257
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 168000000; div: 84
+
+!ENTRY org.eclipse.cdt.core 1 0 2024-07-01 20:54:32.440
+!MESSAGE Indexed 'MAIN' (13 sources, 104 headers) in 0.773 sec: 7,873 declarations; 15,442 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.0086%)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2024-07-01 21:25:56.169
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 168000000; div: 84
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2024-07-01 21:31:02.893
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 168000000; div: 84
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2024-07-01 21:35:14.117
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 168000000; div: 84
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2024-07-01 21:38:14.435
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 168000000; div: 84
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2024-07-01 22:13:16.813
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 168000000; div: 84
+
+!ENTRY com.st.stm32cube.ide.mcu.debug.swv 1 1 2024-07-01 22:21:44.848
+!MESSAGE SWV configuration; base: 36000000; minDiv: 18; maxDiv: 65535; maxSWO: 2000000; limit: 2000000 => SWO: 2000000; CPU: 168000000; div: 84
+
+!ENTRY org.eclipse.core.jobs 2 2 2024-07-01 22:23:07.271
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.cdt.dsf.gdb.internal.ui.console.GdbBasicCliConsole$InputReadJob
+
+!ENTRY org.eclipse.core.jobs 2 2 2024-07-01 22:23:07.274
+!MESSAGE Job found still running after platform shutdown.  Jobs should be canceled by the plugin that scheduled them during shutdown: org.eclipse.debug.core.DebugPlugin$EventDispatchJob
