@@ -20,29 +20,24 @@
 
 extern uint16_t adc_rawdata[NUM_SAMPLES];
 extern volatile float32_t sensor_data;
-
+volatile uint16_t dma2_status;
 
 
 //----------------------------------------------------------------------------------------
 /* MAIN FUNCTION */
 
 int main(){
+dma2_status = 0;
+
 
 	clock_max_config();  // Set SysClk 168MHz
 	fpu_enable();  // Enable floating point unit
 	adc_dma_init();  // Initialise ADC
-	swt1_init();  // Initialise Switch
-	uart2_init();  // Initialise UART2
-
-
-	/* Wait for input from switch*/
-	//while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1);
-	adc_start();  // start ADC
-
-
 
 
 	while(1){
+
+
 
 
 	}
@@ -53,5 +48,6 @@ int main(){
 
 
 }
+
 
 //----------------------------------------------------------------------------------------
