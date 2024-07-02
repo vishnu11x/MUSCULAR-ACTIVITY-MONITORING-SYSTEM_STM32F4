@@ -19,20 +19,22 @@
 #include "main.h"
 
 extern uint16_t adc_rawdata[NUM_SAMPLES];
-extern volatile float32_t sensor_data;
-volatile uint16_t dma2_status;
+extern float32_t sensor_data[NUM_SAMPLES];
 
 
 //----------------------------------------------------------------------------------------
 /* MAIN FUNCTION */
 
 int main(){
-dma2_status = 0;
 
 
 	clock_max_config();  // Set SysClk 168MHz
 	fpu_enable();  // Enable floating point unit
 	adc_dma_init();  // Initialise ADC
+
+	delayms(100);
+	adc_start();
+
 
 
 	while(1){
@@ -48,6 +50,7 @@ dma2_status = 0;
 
 
 }
+
 
 
 //----------------------------------------------------------------------------------------

@@ -1,1 +1,6 @@
-../Src/adc.c:18:6:adc_dma_init	4	static
+D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
+../Src/adc.c:18:6:adc_dma_init	8	static
+../Src/adc.c:77:6:adc_start	4	static
+../Src/adc.c:84:6:adc_convert	16	static
+../Src/adc.c:93:6:adc_stop	4	static
+../Src/adc.c:105:6:DMA2_Stream0_IRQHandler	8	static

@@ -1,0 +1,121 @@
+/*
+ * adc.c
+ *
+ *  Created on: Feb 7, 2024
+ *      Author: vishnu
+ */
+
+#include "adc.h"
+
+
+uint16_t adc_rawdata[NUM_SAMPLES];
+volatile uint16_t dma2_status;
+float32_t sensor_data[NUM_SAMPLES];
+
+//----------------------------------------------------------------------------------------
+/*Function definition*/
+
+//To initialize ADC1
+void adc_dma_init (void){
+
+    /* CONFIG GPIO */
+	RCC -> AHB1ENR |= (1U << 0);  // Enable clock to GPIOA
+
+	GPIOA -> MODER |= ( 1U << 0 );  // Enable analog mode in PA1
+	GPIOA -> MODER |= ( 1U << 1 );
+
+	/* CONFIG ADC */
+	RCC -> APB2ENR |= (1U << 8 );  // Enable clock to ADC1
+	ADC1 -> CR2 |= (1U << 8) | (1U << 9); // Select to use DMA
+
+	ADC1 -> CR2 |= ( 1U << 28 ); //  Enable external trigger on rising edge for ADC1
+	ADC1 -> CR2 |= ( 1U << 29 );
+
+	ADC1 -> CR2 &= ~(1U << 24); // Select TIM2 TRGO event for external trigger
+	ADC1 -> CR2 |= (1U << 25);
+	ADC1 -> CR2 |= (1U << 26);
+	ADC1 -> CR2 &= ~(1U << 27);
+
+
+
+	/* CONFIG DMA */
+	RCC -> AHB1ENR |= (1U << 22);  // Enable clock for DMA
+	DMA2_Stream0 -> CR &= ~(1U << 0) ;  // Disable DMA stream
+
+	while(( (DMA2_Stream0 -> CR) & (1U  << 0) )){}  // Wait till stream is disable
+	DMA2_Stream0 -> CR |= (1U << 8);  // Enable circular mode
+
+	DMA2_Stream0 -> CR |= (1U << 13); // Set Msize to 16-bit (half-word)
+	DMA2_Stream0 -> CR &= ~(1U << 14);
+
+	DMA2_Stream0 -> CR |= (1U << 11);  // Set Psize to 16-bit (half-word)
+	DMA2_Stream0 -> CR &= ~(1U << 12);
+
+	DMA2_Stream0 -> CR |= (1U << 10);  // Enable memory increment
+
+	DMA2_Stream0 -> PAR = (uint32_t)(&(ADC1 -> DR));  // Set periph address
+	DMA2_Stream0 -> M0AR = (uint32_t)(&adc_rawdata);  // Set memory address
+
+	DMA2_Stream0 -> NDTR = NUM_SAMPLES;  // Set No.of data item to transfer
+
+	DMA2_Stream0 -> CR |= (1U << 4);  // Enable Transfer complete interrupt
+	NVIC_EnableIRQ(DMA2_Stream0_IRQn);  // Enable DMA interruot in NVIC
+
+
+	/* CONFIG TIMER FOR TRIGGER (2000HZ) */
+	RCC -> APB1ENR |= ( 1U << 0); // Enable clock for TIM2
+	TIM2 -> PSC = (8400 - 1);  // Set prescaler for 10000Hz timer frequency
+	TIM2 -> ARR = (10000-1);  // Set auto reload value
+
+	TIM2 -> CR2 &= ~(( 1U << 4) | ( 1U << 6));  // Select update event for TRGO
+	TIM2 -> CR2 |= ( 1U << 5);
+
+	TIM2 -> CR1 |= ( 1U << 0);  // Enable TIM2
+
+
+
+
+	ADC1 -> CR2 |= ( 1U << 0 );  // Enable ADC1
+	DMA2_Stream0 -> CR |= (1U << 0);  // Enable DMA stream
+	TIM2 -> CR1 |= ( 1U << 0);  // Enable TIM2
+
+
+}
+
+void adc_convert(void){
+	for(int i =0; i<NUM_SAMPLES; i++){
+
+		sensor_data[i] = ( adc_rawdata[i] * ADC_VREF) / ADC_RES ;  // Equation to convert to volts
+
+	}
+}
+
+void adc_stop(void){
+
+	TIM2 -> CR1 &= ~( 1U << 0);  //  Disable TIM2
+	ADC1 -> CR2 &= ~( 1U << 0 );  // Disable ADC1
+	DMA2_Stream0 -> CR &= ~(1U << 0);  // Disable DMA stream
+
+
+}
+
+
+
+
+void DMA2_Stream0_IRQHandler(void){
+
+	if((DMA2 -> LISR) & (1U << 5)){
+
+		adc_convert();
+		DMA2 -> LIFCR |= (1U << 5);
+
+	}
+
+}
+
+
+
+
+
+
+

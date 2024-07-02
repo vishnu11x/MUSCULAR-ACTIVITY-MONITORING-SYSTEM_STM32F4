@@ -9,7 +9,7 @@
 
 
 uint16_t adc_rawdata[NUM_SAMPLES];
-volatile float32_t sensor_data;
+float32_t sensor_data[NUM_SAMPLES];
 
 //----------------------------------------------------------------------------------------
 /*Function definition*/
@@ -20,7 +20,7 @@ void adc_dma_init (void){
     /* CONFIG GPIO */
 	RCC -> AHB1ENR |= (1U << 0);  // Enable clock to GPIOA
 
-	GPIOA -> MODER |= ( 1U << 0 );  // Enable analog mode in PA0
+	GPIOA -> MODER |= ( 1U << 0 );  // Enable analog mode in PA1
 	GPIOA -> MODER |= ( 1U << 1 );
 
 	/* CONFIG ADC */
@@ -57,11 +57,14 @@ void adc_dma_init (void){
 
 	DMA2_Stream0 -> NDTR = NUM_SAMPLES;  // Set No.of data item to transfer
 
+	DMA2_Stream0 -> CR |= (1U << 4);  // Enable Transfer complete interrupt
+	NVIC_EnableIRQ(DMA2_Stream0_IRQn);  // Enable DMA interruot in NVIC
 
-	/* CONFIG TIMER FOR TRIGGER (1000HZ) */
+
+	/* CONFIG TIMER FOR TRIGGER (2000HZ) */
 	RCC -> APB1ENR |= ( 1U << 0); // Enable clock for TIM2
 	TIM2 -> PSC = (8400 - 1);  // Set prescaler for 10000Hz timer frequency
-	TIM2 -> ARR = (10-1);  // Set auto reload value
+	TIM2 -> ARR = (5-1);  // Set auto reload value
 
 	TIM2 -> CR2 &= ~(( 1U << 4) | ( 1U << 6));  // Select update event for TRGO
 	TIM2 -> CR2 |= ( 1U << 5);
@@ -69,12 +72,44 @@ void adc_dma_init (void){
 	TIM2 -> CR1 |= ( 1U << 0);  // Enable TIM2
 
 
+}
 
+void adc_start(void){
 
 	ADC1 -> CR2 |= ( 1U << 0 );  // Enable ADC1
 	DMA2_Stream0 -> CR |= (1U << 0);  // Enable DMA stream
 	TIM2 -> CR1 |= ( 1U << 0);  // Enable TIM2
+}
 
+void adc_convert(void){
+
+	for(int i =0; i<NUM_SAMPLES; i++){
+
+		sensor_data[i] = ( adc_rawdata[i] * ADC_VREF) / ADC_RES ;  // Equation to convert to volts
+
+	}
+}
+
+void adc_stop(void){
+
+	TIM2 -> CR1 &= ~( 1U << 0);  //  Disable TIM2
+	ADC1 -> CR2 &= ~( 1U << 0 );  // Disable ADC1
+	DMA2_Stream0 -> CR &= ~(1U << 0);  // Disable DMA stream
+
+
+}
+
+
+
+
+void DMA2_Stream0_IRQHandler(void){
+
+	if((DMA2 -> LISR) & (1U << 5)){
+
+		adc_convert();
+		DMA2 -> LIFCR |= (1U << 5);
+
+	}
 
 }
 

@@ -19,11 +19,11 @@
 #define NUM_SAMPLES      10
 
 extern uint16_t adc_rawdata[NUM_SAMPLES];  //  To store raw ADC value
-extern volatile float32_t sensor_data;  // To store sensor data in volts
+extern float32_t sensor_data[NUM_SAMPLES];  // To store sensor data in volts
 
 
 /* FUNCTION DECLARATION */
-void adc_dma_init (void);  // To initialize ADC
-void adc_start (void); // To start ADC1
+void adc_dma_init (void);  // To initialize ADC1
+void adc_start(void);  // To start ADC1
 void adc_stop (void);  // To stop ADC1
 #endif /* ADC_H_ */
