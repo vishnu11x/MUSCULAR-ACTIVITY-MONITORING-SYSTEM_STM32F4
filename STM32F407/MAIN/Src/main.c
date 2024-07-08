@@ -20,6 +20,19 @@
 
 extern uint16_t adc_rawdata[NUM_SAMPLES];
 extern float32_t sensor_data[NUM_SAMPLES];
+extern volatile float32_t dma2_status;
+float32_t input[NUM_SAMPLES];
+float32_t  fltr_data[NUM_SAMPLES];
+
+static float32_t m_biquad_state[IIR_ORDER];
+
+
+static float32_t m_biquad_coeffs[5*IIR_NUMSTAGES] = { 0.2271, 0.4542, 0.2271, 0.2394, -0.2067, 1.0000, -2.0000, 1.0000, 1.8894, -0.8958 };
+
+
+
+
+
 
 
 //----------------------------------------------------------------------------------------
@@ -27,17 +40,38 @@ extern float32_t sensor_data[NUM_SAMPLES];
 
 int main(){
 
+	dma2_status = 0;
 
 	clock_max_config();  // Set SysClk 168MHz
 	fpu_enable();  // Enable floating point unit
+	arm_biquad_cascade_df2T_instance_f32 const iir_inst =
+	{
+	  IIR_ORDER/2,
+	  m_biquad_state,
+	  m_biquad_coeffs
+	};
+
+
 	adc_dma_init();  // Initialise ADC
 
 	delayms(100);
 	adc_start();
 
 
-
 	while(1){
+
+		if(dma2_status == 1){
+
+			dma2_status = 0;
+
+			arm_biquad_cascade_df2T_f32(&iir_inst, sensor_data, fltr_data, NUM_SAMPLES);
+
+
+
+
+
+
+		}
 
 
 

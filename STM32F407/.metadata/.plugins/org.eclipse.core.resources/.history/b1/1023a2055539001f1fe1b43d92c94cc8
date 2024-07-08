@@ -1,0 +1,29 @@
+/*
+ * adc.h
+ *
+ *  Created on: Feb 7, 2024
+ *      Author: vishnu
+ */
+
+#ifndef ADC_H_
+#define ADC_H_
+
+#include <stdint.h>
+#include <stm32f4xx.h>  // Library for STM32f407
+#include <arm_math.h>
+
+
+#define ADC_VREF         3.3f         // ADC reference voltage
+#define ADC_RES          (float)(pow(2,12)-1)  // Resolution of ADC (12-bit)
+
+#define NUM_SAMPLES      10
+
+extern uint16_t adc_rawdata[NUM_SAMPLES];  //  To store raw ADC value
+extern float32_t sensor_data[NUM_SAMPLES];  // To store sensor data in volts
+extern float32_t dma2_status;
+
+/* FUNCTION DECLARATION */
+void adc_dma_init (void);  // To initialize ADC1
+void adc_start(void);  // To start ADC1
+void adc_stop (void);  // To stop ADC1
+#endif /* ADC_H_ */
