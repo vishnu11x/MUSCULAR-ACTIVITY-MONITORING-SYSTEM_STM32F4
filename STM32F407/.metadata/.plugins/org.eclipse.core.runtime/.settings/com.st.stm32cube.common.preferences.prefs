@@ -1,2 +1,3 @@
-com.st.stm32cube.ide.mcu.debug.swv.pref_buff_size=1000000000
+DeviceConfigurationTool.AskToSwitchToCubeMxPerspective=false
+DeviceConfigurationTool.SwitchToCubeMxPerspective=true
 eclipse.preferences.version=1

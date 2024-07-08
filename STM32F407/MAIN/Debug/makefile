@@ -1,6 +1,6 @@
 ################################################################################
 # Automatically-generated file. Do not edit!
-# Toolchain: GNU Tools for STM32 (11.3.rel1)
+# Toolchain: GNU Tools for STM32 (12.3.rel1)
 ################################################################################
 
 -include ../makefile.init
@@ -9,7 +9,6 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include chip_header/Middlewares/Third_Party/FatFs/src/subdir.mk
 -include Startup/subdir.mk
 -include Src/subdir.mk
 -include objects.mk
@@ -60,8 +59,8 @@ all: main-build
 main-build: MAIN.elf secondary-outputs
 
 # Tool invocations
-MAIN.elf MAIN.map: $(OBJS) $(USER_OBJS) D:\Project\MUSCULAR\ ACTIVITY\ MONITORING\ SYSTEM\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\STM32F407\MAIN\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "MAIN.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\Project\MUSCULAR ACTIVITY MONITORING SYSTEM\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\STM32F407\MAIN\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MAIN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
+MAIN.elf MAIN.map: $(OBJS) $(USER_OBJS) D:\PROJECTS\Git\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\STM32F407\MAIN\STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "MAIN.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\PROJECTS\Git\MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4\STM32F407\MAIN\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="MAIN.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -u _scanf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

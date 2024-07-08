@@ -1,6 +1,6 @@
-D:/Project/MUSCULAR ACTIVITY MONITORING SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_header/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
-../Src/adc.c:24:6:ADC_init	8	static
-../Src/adc.c:54:6:ADC_start	8	static
-../Src/adc.c:61:6:ADC_stop	4	static
-../Src/adc.c:66:11:ADC_read	4	static
-../Src/adc.c:76:6:ADC_IRQHandler	8	static
+D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/MAIN/chip_headers/Drivers/CMSIS/Include/core_cm4.h:1684:22:__NVIC_EnableIRQ	16	static,ignoring_inline_asm
+../Src/adc.c:19:6:adc_dma_init	8	static
+../Src/adc.c:78:6:adc_start	4	static
+../Src/adc.c:85:6:adc_convert	16	static
+../Src/adc.c:94:6:adc_stop	4	static
+../Src/adc.c:106:6:DMA2_Stream0_IRQHandler	8	static

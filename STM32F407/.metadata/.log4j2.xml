@@ -2,7 +2,7 @@
 <Configuration status="info">
     <ThresholdFilter level="INFO"/>
     <Appenders>
-        <RollingFile name="DEBUGFILE" fileName="D:/Project/MUSCULAR ACTIVITY MONITORING SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/.metadata/.ide.log" filePattern="D:/Project/MUSCULAR ACTIVITY MONITORING SYSTEM/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/.metadata/.ide.log-%d{yyyy-MM-dd}.log">
+        <RollingFile name="DEBUGFILE" fileName="D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/.metadata/.ide.log" filePattern="D:/PROJECTS/Git/MUSCULAR-ACTIVITY-MONITORING-SYSTEM_STM32F4/STM32F407/.metadata/.ide.log-%d{yyyy-MM-dd}.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} [%p] %c{1}:%L - %m%n" />
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true" />

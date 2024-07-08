@@ -18,52 +18,73 @@
 
 #include "main.h"
 
-extern volatile float32_t sensor_data;
-extern float32_t LPF_450HZ_KERNEL[fltr_len];
-extern float32_t HPF_25HZ_KERNEL[fltr_len];
-volatile float32_t fltr_sensor_data;
-fir_filter_type fir_lpf;
-fir_filter_type fir_hpf;
-char buff[fltr_len];
+extern uint16_t adc_rawdata[NUM_SAMPLES];
+extern float32_t sensor_data[NUM_SAMPLES];
+extern volatile float32_t dma2_status;
+float32_t input[NUM_SAMPLES];
+float32_t  fltr_data[NUM_SAMPLES];
+
+static float32_t m_biquad_state[IIR_ORDER];
+
+
+static float32_t m_biquad_coeffs[5*IIR_NUMSTAGES] = { 0.2271, 0.4542, 0.2271, 0.2394, -0.2067, 1.0000, -2.0000, 1.0000, 1.8894, -0.8958 };
+
+
+
+
+
+
+
 //----------------------------------------------------------------------------------------
 /* MAIN FUNCTION */
 
 int main(){
 
+	dma2_status = 0;
+
 	clock_max_config();  // Set SysClk 168MHz
 	fpu_enable();  // Enable floating point unit
-	ADC_init();  // Initialize ADC
-	SWT1_init();  // Initialize Switch
-	uart2_init();  // Initialize UART2
-	// initialize Filter function
-	fir_fltr_init(&fir_lpf,LPF_450HZ_KERNEL , fltr_len);
-	fir_fltr_init(&fir_hpf, HPF_25HZ_KERNEL, fltr_len);
+	arm_biquad_cascade_df2T_instance_f32 const iir_inst =
+	{
+	  IIR_ORDER/2,
+	  m_biquad_state,
+	  m_biquad_coeffs
+	};
 
+
+	adc_dma_init();  // Initialise ADC
+
+	delayms(100);
+	adc_start();
 
 
 	while(1){
 
+		if(dma2_status == 1){
 
-		/* Wait for input from switch*/
-		while( ((GPIOA -> IDR ) & ( 1U << 0 )) == 1){
+			dma2_status = 0;
 
-			ADC_start();  // start ADC
-			fltr_sensor_data = fir_fltr_run(&fir_hpf, sensor_data);
-			fltr_sensor_data = fir_fltr_run(&fir_lpf, fltr_sensor_data);
-			sprintf(buff,"%f \n \r",fltr_sensor_data);
-			uart2_string_write(buff,"\n \r");
-			delayms(1);
+			arm_biquad_cascade_df2T_f32(&iir_inst, sensor_data, fltr_data, NUM_SAMPLES);
+
+
+
+
 
 
 		}
 
-		ADC_stop();
-	 
+
 
 
 	}
+	 
+
+
+
 
 
 }
+
+
 
 //----------------------------------------------------------------------------------------

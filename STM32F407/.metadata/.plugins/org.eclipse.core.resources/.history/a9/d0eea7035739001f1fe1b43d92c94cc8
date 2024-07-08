@@ -1,0 +1,104 @@
+/**
+ ******************************************************************************
+ * @file           : main.c
+ * @author         : VISHNU C S
+ * @brief          : Main program body
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2024 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
+
+#include "main.h"
+
+extern uint16_t adc_rawdata[NUM_SAMPLES];
+extern float32_t sensor_data[NUM_SAMPLES];
+extern volatile float32_t dma2_status;
+float32_t fltr_data[NUM_SAMPLES];
+
+
+
+//----------------------------------------------------------------------------------------
+/* MAIN FUNCTION */
+
+int main(){
+
+	/*dma2_status = 0;
+
+	clock_max_config();  // Set SysClk 168MHz
+	fpu_enable();  // Enable floating point unit
+	adc_dma_init();  // Initialise ADC
+
+	delayms(100);
+	adc_start();
+
+
+	while(1){
+
+		if(dma2_status == 1){
+
+			run_iir(sensor_data, fltr_data, NUM_SAMPLES);
+
+			dma2_status = 0;
+		}*/
+#define TEST_LENGTH_SAMPLES 128
+#define BLOCK_SIZE 32
+#define NUM_BLOCKS (TEST_LENGTH_SAMPLES / BLOCK_SIZE)
+
+#define NUM_STAGE_IIR 2
+#define NUM_ORDER_IIR (NUM_STAGE_IIR * 2)
+#define NUM_STD_COEFFS 5 // b0, b1, b2, a1, a2
+
+static float32_t iirState[NUM_ORDER_IIR];
+static float32_t iirCoeffs[NUM_STAGE_IIR * NUM_STD_COEFFS] =
+{
+    0.96452, -1.92904, 0.96452, 1.94945, -0.95020,
+    1.00000, -2.00000, 1.00000, 1.97831, -0.97906
+};
+
+float32_t OutputValues[TEST_LENGTH_SAMPLES];
+float32_t InputValues[TEST_LENGTH_SAMPLES];
+
+float32_t *InputValuesf32_ptr = &InputValues[0];  // declare Input pointer
+float32_t *OutputValuesf32_ptr = &OutputValues[0]; // declare Output pointer
+
+arm_biquad_cascade_df2T_instance_f32 S;
+
+int main()
+{
+    uint32_t k;
+
+    for (k = 0; k < TEST_LENGTH_SAMPLES; k++)
+    {
+  	    InputValues[n]= arm_sin_f32(2*PI*50.0*n/500.0);
+    }
+
+    arm_biquad_cascade_df2T_init_f32(&S, NUM_STAGE_IIR, &iirCoeffs[0], &iirState[0]);
+
+    for (k = 0; k < NUMBLOCKS; k++)
+    {
+	arm_biquad_cascade_df2T_f32 (&S, InputValuesf32_ptr + (k*BLOCKSIZE), OutputValuesf32_ptr + (k*BLOCKSIZE), BLOCKSIZE);    // perform filtering
+    }
+
+
+
+
+	}
+	 
+
+
+
+
+
+}
+
+
+
+//----------------------------------------------------------------------------------------
